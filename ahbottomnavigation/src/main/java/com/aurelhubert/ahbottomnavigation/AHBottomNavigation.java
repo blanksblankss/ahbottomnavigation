@@ -88,6 +88,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private Drawable notificationBackgroundDrawable;
 	private Typeface notificationTypeface;
 	private int notificationActiveMarginLeft, notificationInactiveMarginLeft;
+	private int notificationActiveMarginTop, notificationInactiveMarginTop;
 
 	/**
 	 * Constructors
@@ -172,6 +173,8 @@ public class AHBottomNavigation extends FrameLayout {
 		// Notifications
 		notificationActiveMarginLeft = (int) resources.getDimension(R.dimen.bottom_navigation_notification_margin_left_active);
 		notificationInactiveMarginLeft = (int) resources.getDimension(R.dimen.bottom_navigation_notification_margin_left);
+		notificationActiveMarginTop = (int) resources.getDimension(R.dimen.bottom_navigation_notification_margin_top_active);
+		notificationInactiveMarginTop = (int) resources.getDimension(R.dimen.bottom_navigation_notification_margin_top);
 
 		ViewCompat.setElevation(this, resources.getDimension(R.dimen.bottom_navigation_elevation));
 		setClipToPadding(false);
@@ -401,7 +404,7 @@ public class AHBottomNavigation extends FrameLayout {
 
 					ViewGroup.MarginLayoutParams paramsNotification = (ViewGroup.MarginLayoutParams)
 							notification.getLayoutParams();
-					paramsNotification.setMargins(notificationActiveMarginLeft, paramsNotification.topMargin,
+					paramsNotification.setMargins(notificationActiveMarginLeft, notificationActiveMarginTop,
 							paramsNotification.rightMargin, paramsNotification.bottomMargin);
 
 					view.requestLayout();
@@ -410,7 +413,7 @@ public class AHBottomNavigation extends FrameLayout {
 				icon.setSelected(false);
 				ViewGroup.MarginLayoutParams paramsNotification = (ViewGroup.MarginLayoutParams)
 						notification.getLayoutParams();
-				paramsNotification.setMargins(notificationInactiveMarginLeft, paramsNotification.topMargin,
+				paramsNotification.setMargins(notificationInactiveMarginLeft, notificationInactiveMarginTop,
 						paramsNotification.rightMargin, paramsNotification.bottomMargin);
 			}
 
@@ -590,6 +593,7 @@ public class AHBottomNavigation extends FrameLayout {
 				icon.setSelected(true);
 				AHHelper.updateTopMargin(icon, inactiveMargin, activeMarginTop);
 				AHHelper.updateLeftMargin(notification, notificationInactiveMarginLeft, notificationActiveMarginLeft);
+				AHHelper.updateTopMargin(notification, notificationInactiveMarginTop, notificationActiveMarginTop);
 				AHHelper.updateTextColor(title, itemInactiveColor, itemActiveColor);
 				AHHelper.updateAlpha(title, 0, 1);
 				AHHelper.updateWidth(container, notSelectedItemWidth, selectedItemWidth);
@@ -648,6 +652,7 @@ public class AHBottomNavigation extends FrameLayout {
 				icon.setSelected(false);
 				AHHelper.updateTopMargin(icon, activeMarginTop, inactiveMargin);
 				AHHelper.updateLeftMargin(notification, notificationActiveMarginLeft, notificationInactiveMarginLeft);
+				AHHelper.updateTopMargin(notification, notificationActiveMarginTop, notificationInactiveMarginTop);
 				AHHelper.updateTextColor(title, itemActiveColor, itemInactiveColor);
 				AHHelper.updateAlpha(title, 1, 0);
 				AHHelper.updateWidth(container, selectedItemWidth, notSelectedItemWidth);
