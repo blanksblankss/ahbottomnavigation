@@ -50,6 +50,7 @@ public class AHBottomNavigation extends FrameLayout {
 
 	// Listener
 	private OnTabSelectedListener tabSelectedListener;
+	private OnNavigationHeightListener navigationHeightListener;
 
 	// Variables
 	private Context context;
@@ -1010,6 +1011,9 @@ public class AHBottomNavigation extends FrameLayout {
 			} else {
 				bottomNavigationBehavior.setBehaviorTranslationEnabled(behaviorTranslationEnabled);
 			}
+			if (navigationHeightListener != null) {
+				bottomNavigationBehavior.setOnNavigationHeightListener(navigationHeightListener);
+			}
 			((CoordinatorLayout.LayoutParams) params).setBehavior(bottomNavigationBehavior);
 			if (needHideBottomNavigation) {
 				needHideBottomNavigation = false;
@@ -1123,6 +1127,28 @@ public class AHBottomNavigation extends FrameLayout {
 	 */
 	public void removeOnTabSelectedListener() {
 		this.tabSelectedListener = null;
+	}
+
+	/**
+	 * Set OnNavigationHeightListener
+	 */
+	public void setOnNavigationHeightListener(OnNavigationHeightListener navigationHeightListener) {
+		this.navigationHeightListener = navigationHeightListener;
+
+		if (bottomNavigationBehavior != null) {
+			bottomNavigationBehavior.setOnNavigationHeightListener(navigationHeightListener);
+		}
+	}
+
+	/**
+	 * Remove OnNavigationHeightListener()
+	 */
+	public void removeOnNavigationHeightListener() {
+		this.navigationHeightListener = null;
+
+		if (bottomNavigationBehavior != null) {
+			bottomNavigationBehavior.removeOnNavigationHeightListener();
+		}
 	}
 
 	/**
@@ -1262,6 +1288,15 @@ public class AHBottomNavigation extends FrameLayout {
 		 * @return boolean: true for updating the tab UI, false otherwise
 		 */
 		boolean onTabSelected(int position, boolean wasSelected);
+	}
+
+	public interface OnNavigationHeightListener {
+		/**
+		 * Called when the bottom navigation height is changed
+		 *
+		 * @param height    int: height of bottom navigation
+		 */
+		void onHeightChange(int height);
 	}
 
 }
