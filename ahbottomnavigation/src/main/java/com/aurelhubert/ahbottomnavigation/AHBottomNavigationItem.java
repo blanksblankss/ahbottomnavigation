@@ -1,12 +1,14 @@
 package com.aurelhubert.ahbottomnavigation;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v4.content.ContextCompat;
 
 /**
@@ -122,13 +124,17 @@ public class AHBottomNavigationItem {
 		this.colorRes = colorRes;
 		this.color = 0;
 	}
-
+	
 	public Drawable getDrawable(Context context) {
-		if (drawableRes != 0) {
-			return ContextCompat.getDrawable(context, drawableRes);
-		}
-		return drawable;
-	}
+    if (drawableRes != 0) {
+      try {
+        return VectorDrawableCompat.create(context.getResources(), drawableRes, null);
+      }catch (Resources.NotFoundException e){
+        return ContextCompat.getDrawable(context, drawableRes);
+      }
+    }
+    return drawable;
+  }
 
 	public void setDrawable(@DrawableRes int drawableRes) {
 		this.drawableRes = drawableRes;
