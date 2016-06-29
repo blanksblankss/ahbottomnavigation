@@ -915,6 +915,18 @@ public class AHBottomNavigation extends FrameLayout {
 		this.itemInactiveColor = inactiveColor;
 		createItems();
 	}
+	
+	/**
+	 * Set the colors used when the bottom bar uses the colored mode
+	 *
+	 * @param colorActive   The active color
+	 * @param colorInactive The inactive color
+	 */
+	public void setColoredColors(@ColorInt int colorActive, @ColorInt int colorInactive) {
+		this.coloredTitleColorActive = colorActive;
+		this.coloredTitleColorInactive = colorInactive;
+		createItems();
+	}
 
 	/**
 	 * Set notification typeface
@@ -1294,7 +1306,7 @@ public class AHBottomNavigation extends FrameLayout {
 		/**
 		 * Called when the bottom navigation height is changed
 		 *
-		 * @param height    int: height of bottom navigation
+		 * @param height int: height of bottom navigation
 		 */
 		void onHeightChange(int height);
 	}
