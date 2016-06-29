@@ -922,7 +922,7 @@ public class AHBottomNavigation extends FrameLayout {
 	 * @param colorActive   The active color
 	 * @param colorInactive The inactive color
 	 */
-	public void setColoredColors(@ColorInt int colorActive, @ColorInt int colorInactive) {
+	public void setColoredModeColors(@ColorInt int colorActive, @ColorInt int colorInactive) {
 		this.coloredTitleColorActive = colorActive;
 		this.coloredTitleColorInactive = colorInactive;
 		createItems();
