@@ -9,6 +9,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
@@ -61,6 +62,7 @@ public class DemoActivity extends AppCompatActivity {
 			@Override
 			public boolean onTabSelected(int position, boolean wasSelected) {
 
+				currentFragment = adapter.getCurrentFragment();
 				if (wasSelected) {
 					currentFragment.refresh();
 					return true;
@@ -71,7 +73,6 @@ public class DemoActivity extends AppCompatActivity {
 				}
 
 				viewPager.setCurrentItem(position, false);
-				currentFragment = adapter.getCurrentFragment();
 				currentFragment.willBeDisplayed();
 
 				if (position == 1) {
@@ -146,6 +147,12 @@ public class DemoActivity extends AppCompatActivity {
 				}
 
 				return true;
+			}
+		});
+
+		bottomNavigation.setOnNavigationHeightListener(new AHBottomNavigation.OnNavigationHeightListener() {
+			@Override public void onHeightChange(int height) {
+				Log.d("DemoActivity", "BottomNavigation Height: " + height);
 			}
 		});
 
