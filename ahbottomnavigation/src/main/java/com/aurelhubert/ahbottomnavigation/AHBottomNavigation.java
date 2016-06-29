@@ -50,7 +50,7 @@ public class AHBottomNavigation extends FrameLayout {
 
 	// Listener
 	private OnTabSelectedListener tabSelectedListener;
-	private OnNavigationHeightListener navigationHeightListener;
+	private OnNavigationPositionListener navigationPositionListener;
 
 	// Variables
 	private Context context;
@@ -915,7 +915,7 @@ public class AHBottomNavigation extends FrameLayout {
 		this.itemInactiveColor = inactiveColor;
 		createItems();
 	}
-	
+
 	/**
 	 * Set the colors used when the bottom bar uses the colored mode
 	 *
@@ -1023,8 +1023,8 @@ public class AHBottomNavigation extends FrameLayout {
 			} else {
 				bottomNavigationBehavior.setBehaviorTranslationEnabled(behaviorTranslationEnabled);
 			}
-			if (navigationHeightListener != null) {
-				bottomNavigationBehavior.setOnNavigationHeightListener(navigationHeightListener);
+			if (navigationPositionListener != null) {
+				bottomNavigationBehavior.setOnNavigationPositionListener(navigationPositionListener);
 			}
 			((CoordinatorLayout.LayoutParams) params).setBehavior(bottomNavigationBehavior);
 			if (needHideBottomNavigation) {
@@ -1142,24 +1142,24 @@ public class AHBottomNavigation extends FrameLayout {
 	}
 
 	/**
-	 * Set OnNavigationHeightListener
+	 * Set OnNavigationPositionListener
 	 */
-	public void setOnNavigationHeightListener(OnNavigationHeightListener navigationHeightListener) {
-		this.navigationHeightListener = navigationHeightListener;
+	public void setOnNavigationPositionListener(OnNavigationPositionListener navigationPositionListener) {
+		this.navigationPositionListener = navigationPositionListener;
 
 		if (bottomNavigationBehavior != null) {
-			bottomNavigationBehavior.setOnNavigationHeightListener(navigationHeightListener);
+			bottomNavigationBehavior.setOnNavigationPositionListener(navigationPositionListener);
 		}
 	}
 
 	/**
-	 * Remove OnNavigationHeightListener()
+	 * Remove OnNavigationPositionListener()
 	 */
-	public void removeOnNavigationHeightListener() {
-		this.navigationHeightListener = null;
+	public void removeOnNavigationPositionListener() {
+		this.navigationPositionListener = null;
 
 		if (bottomNavigationBehavior != null) {
-			bottomNavigationBehavior.removeOnNavigationHeightListener();
+			bottomNavigationBehavior.removeOnNavigationPositionListener();
 		}
 	}
 
@@ -1302,13 +1302,13 @@ public class AHBottomNavigation extends FrameLayout {
 		boolean onTabSelected(int position, boolean wasSelected);
 	}
 
-	public interface OnNavigationHeightListener {
+	public interface OnNavigationPositionListener {
 		/**
-		 * Called when the bottom navigation height is changed
+		 * Called when the bottom navigation position is changed
 		 *
-		 * @param height int: height of bottom navigation
+		 * @param y int: y translation of bottom navigation
 		 */
-		void onHeightChange(int height);
+		void onPositionChange(int y);
 	}
 
 }

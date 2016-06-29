@@ -150,9 +150,9 @@ public class DemoActivity extends AppCompatActivity {
 			}
 		});
 
-		bottomNavigation.setOnNavigationHeightListener(new AHBottomNavigation.OnNavigationHeightListener() {
-			@Override public void onHeightChange(int height) {
-				Log.d("DemoActivity", "BottomNavigation Height: " + height);
+		bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNavigationPositionListener() {
+			@Override public void onPositionChange(int y) {
+				Log.d("DemoActivity", "BottomNavigation Position: " + y);
 			}
 		});
 

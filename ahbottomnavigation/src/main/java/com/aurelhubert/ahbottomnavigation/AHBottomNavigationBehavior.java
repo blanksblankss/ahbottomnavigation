@@ -18,7 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Interpolator;
 
-import com.aurelhubert.ahbottomnavigation.AHBottomNavigation.OnNavigationHeightListener;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation.OnNavigationPositionListener;
 
 /**
  *
@@ -39,7 +39,7 @@ public class AHBottomNavigationBehavior<V extends View> extends VerticalScrollin
 	private boolean fabBottomMarginInitialized = false;
 	private float targetOffset = 0, fabTargetOffset = 0, fabDefaultBottomMargin = 0, snackBarY = 0;
 	private boolean behaviorTranslationEnabled = true;
-	private OnNavigationHeightListener navigationHeightListener;
+	private OnNavigationPositionListener navigationPositionListener;
 
 	/**
 	 * Constructor
@@ -183,8 +183,8 @@ public class AHBottomNavigationBehavior<V extends View> extends VerticalScrollin
 						floatingActionButton.requestLayout();
 					}
 					// Pass navigation height to listener
-					if (navigationHeightListener != null) {
-						navigationHeightListener.onHeightChange((int) (view.getMeasuredHeight() - view.getTranslationY() + snackBarY));
+					if (navigationPositionListener != null) {
+						navigationPositionListener.onPositionChange((int) (view.getMeasuredHeight() - view.getTranslationY() + snackBarY));
 					}
 				}
 			});
@@ -226,8 +226,8 @@ public class AHBottomNavigationBehavior<V extends View> extends VerticalScrollin
 					floatingActionButton.requestLayout();
 				}
 				// Pass navigation height to listener
-				if (navigationHeightListener != null) {
-					navigationHeightListener.onHeightChange((int) (child.getMeasuredHeight() - child.getTranslationY() + snackBarY));
+				if (navigationPositionListener != null) {
+					navigationPositionListener.onPositionChange((int) (child.getMeasuredHeight() - child.getTranslationY() + snackBarY));
 				}
 			}
 		});
@@ -261,17 +261,17 @@ public class AHBottomNavigationBehavior<V extends View> extends VerticalScrollin
 	}
 
 	/**
-	 * Set OnNavigationHeightListener
+	 * Set OnNavigationPositionListener
 	 */
-	public void setOnNavigationHeightListener(OnNavigationHeightListener navigationHeightListener) {
-		this.navigationHeightListener = navigationHeightListener;
+	public void setOnNavigationPositionListener(OnNavigationPositionListener navigationHeightListener) {
+		this.navigationPositionListener = navigationHeightListener;
 	}
 
 	/**
-	 * Remove OnNavigationHeightListener()
+	 * Remove OnNavigationPositionListener()
 	 */
-	public void removeOnNavigationHeightListener() {
-		this.navigationHeightListener = null;
+	public void removeOnNavigationPositionListener() {
+		this.navigationPositionListener = null;
 	}
 
 	/**
@@ -319,8 +319,8 @@ public class AHBottomNavigationBehavior<V extends View> extends VerticalScrollin
 							floatingActionButton.requestLayout();
 						}
 						// Pass navigation height to listener
-						if (navigationHeightListener != null) {
-							navigationHeightListener.onHeightChange((int) (child.getMeasuredHeight() - child.getTranslationY() + snackBarY));
+						if (navigationPositionListener != null) {
+							navigationPositionListener.onPositionChange((int) (child.getMeasuredHeight() - child.getTranslationY() + snackBarY));
 						}
 					}
 				});
