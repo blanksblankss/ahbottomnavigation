@@ -1146,7 +1146,6 @@ public class AHBottomNavigation extends FrameLayout {
 	 */
 	public void setOnNavigationPositionListener(OnNavigationPositionListener navigationPositionListener) {
 		this.navigationPositionListener = navigationPositionListener;
-
 		if (bottomNavigationBehavior != null) {
 			bottomNavigationBehavior.setOnNavigationPositionListener(navigationPositionListener);
 		}
@@ -1157,7 +1156,6 @@ public class AHBottomNavigation extends FrameLayout {
 	 */
 	public void removeOnNavigationPositionListener() {
 		this.navigationPositionListener = null;
-
 		if (bottomNavigationBehavior != null) {
 			bottomNavigationBehavior.removeOnNavigationPositionListener();
 		}

@@ -1,6 +1,12 @@
 ## Changelog
 
-### Newest version: 1.3.0
+### Newest version: 1.3.1
+
+* Added `setColoredModeColors(@ColorInt int colorActive, @ColorInt int colorInactive)` to set the item color for the colored mode.
+* Added `OnNavigationPositionListener` to follow the Y translation changes of the bottom navigation.
+* Improved vector support.
+
+### 1.3.0
 
 * **BREAKING!** Updated listener, now return a boolean => `boolean onTabSelected(int position, boolean wasSelected);`
 * Improved notification management for small items

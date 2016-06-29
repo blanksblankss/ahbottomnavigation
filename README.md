@@ -5,13 +5,10 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ## Demo
 <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo1.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo2.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo3.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo4.gif" width="208" height="368" />
 
-## What's new (1.3.0) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
-
-* **BREAKING!** Updated listener, now return a boolean => `boolean onTabSelected(int position, boolean wasSelected);`
-* Improved notification management for small items
-* Added notification elevation
-* Managed complex drawable (selector with states)
-* Added constructor `public AHBottomNavigationItem(String title, Drawable drawable)`
+## What's new (1.3.1) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
+* Added `setColoredModeColors(@ColorInt int colorActive, @ColorInt int colorInactive)` to set the item color for the colored mode.
+* Added `OnNavigationPositionListener` to follow the Y translation changes of the bottom navigation.
+* Improved vector support.
 
 ## Features
 * Follow the bottom navigation guidelines (https://www.google.com/design/spec/components/bottom-navigation.html)
@@ -26,7 +23,7 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ### Gradle
 ```groovy
 dependencies {
-    compile 'com.aurelhubert:ahbottomnavigation:1.3.0'
+    compile 'com.aurelhubert:ahbottomnavigation:1.3.1'
 }
 ```
 ### XML
@@ -97,12 +94,17 @@ bottomNavigation.setNotificationBackgroundColor(Color.parseColor("#F63D2B"));
 bottomNavigation.setNotification("4", 1);
 bottomNavigation.setNotification("", 1);
 
-// Set listener
+// Set listeners
 bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
 	@Override
 	public boolean onTabSelected(int position, boolean wasSelected) {
 		// Do something cool here...
         return true;
+	}
+});
+bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNavigationPositionListener() {
+	@Override public void onPositionChange(int y) {
+		// Manage the new y position
 	}
 });
 ```
