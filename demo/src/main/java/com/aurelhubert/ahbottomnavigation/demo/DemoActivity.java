@@ -62,7 +62,10 @@ public class DemoActivity extends AppCompatActivity {
 			@Override
 			public boolean onTabSelected(int position, boolean wasSelected) {
 
-				currentFragment = adapter.getCurrentFragment();
+				if (currentFragment == null) {
+					currentFragment = adapter.getCurrentFragment();
+				}
+
 				if (wasSelected) {
 					currentFragment.refresh();
 					return true;
@@ -73,6 +76,7 @@ public class DemoActivity extends AppCompatActivity {
 				}
 
 				viewPager.setCurrentItem(position, false);
+				currentFragment = adapter.getCurrentFragment();
 				currentFragment.willBeDisplayed();
 
 				if (position == 1) {
