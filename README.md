@@ -5,10 +5,9 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ## Demo
 <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo1.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo2.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo3.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo4.gif" width="208" height="368" />
 
-## What's new (1.3.1) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
-* Added `setColoredModeColors(@ColorInt int colorActive, @ColorInt int colorInactive)` to set the item color for the colored mode.
-* Added `OnNavigationPositionListener` to follow the Y translation changes of the bottom navigation.
-* Improved vector support.
+## What's new (1.3.2) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
+* Added a new class `AHBottomNavigationAdapter` to inflate menu from resources.
+* Updated example to show how to implement `AHBottomNavigationAdapter`.
 
 ## Features
 * Follow the bottom navigation guidelines (https://www.google.com/design/spec/components/bottom-navigation.html)
@@ -23,7 +22,7 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ### Gradle
 ```groovy
 dependencies {
-    compile 'com.aurelhubert:ahbottomnavigation:1.3.1'
+    compile 'com.aurelhubert:ahbottomnavigation:1.3.2'
 }
 ```
 ### XML
@@ -107,6 +106,13 @@ bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNaviga
 		// Manage the new y position
 	}
 });
+```
+
+### With XML menu
+```java
+AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
+AHBottomNavigationAdapter navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_3);
+navigationAdapter.setupWithBottomNavigation(bottomNavigation);
 ```
 
 ## TODO

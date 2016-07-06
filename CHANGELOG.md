@@ -1,6 +1,11 @@
 ## Changelog
 
-### Newest version: 1.3.1
+### Newest version: 1.3.2
+
+* Added a new class `AHBottomNavigationAdapter` to inflate menu from resources.
+* Updated example to show how to implement `AHBottomNavigationAdapter`.
+
+### 1.3.1
 
 * Added `setColoredModeColors(@ColorInt int colorActive, @ColorInt int colorInactive)` to set the item color for the colored mode.
 * Added `OnNavigationPositionListener` to follow the Y translation changes of the bottom navigation.
