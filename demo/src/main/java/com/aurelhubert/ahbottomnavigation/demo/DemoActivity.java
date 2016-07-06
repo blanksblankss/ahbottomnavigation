@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 
@@ -23,7 +24,9 @@ public class DemoActivity extends AppCompatActivity {
 
 	private DemoFragment currentFragment;
 	private DemoViewPagerAdapter adapter;
+	private AHBottomNavigationAdapter navigationAdapter;
 	private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
+	private boolean useMenuResource = true;
 
 	// UI
 	private AHBottomNavigationViewPager viewPager;
@@ -46,15 +49,21 @@ public class DemoActivity extends AppCompatActivity {
 		viewPager = (AHBottomNavigationViewPager) findViewById(R.id.view_pager);
 		floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_action_button);
 
-		AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_apps_black_24dp, R.color.color_tab_1);
-		AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_maps_local_bar, R.color.color_tab_2);
-		AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_maps_local_restaurant, R.color.color_tab_3);
+		if (useMenuResource) {
+			navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_3);
+			navigationAdapter.setupWithBottomNavigation(bottomNavigation);
+		} else {
+			AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_apps_black_24dp, R.color.color_tab_1);
+			AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_maps_local_bar, R.color.color_tab_2);
+			AHBottomNavigationItem item3 = new AHBottomNavigationItem(R.string.tab_3, R.drawable.ic_maps_local_restaurant, R.color.color_tab_3);
 
-		bottomNavigationItems.add(item1);
-		bottomNavigationItems.add(item2);
-		bottomNavigationItems.add(item3);
+			bottomNavigationItems.add(item1);
+			bottomNavigationItems.add(item2);
+			bottomNavigationItems.add(item3);
 
-		bottomNavigation.addItems(bottomNavigationItems);
+			bottomNavigation.addItems(bottomNavigationItems);
+		}
+
 		bottomNavigation.setAccentColor(Color.parseColor("#F63D2B"));
 		bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
 
@@ -195,6 +204,18 @@ public class DemoActivity extends AppCompatActivity {
 	 * Add or remove items of the bottom navigation
 	 */
 	public void updateBottomNavigationItems(boolean addItems) {
+
+		if (useMenuResource) {
+			if (addItems) {
+				navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_5);
+				navigationAdapter.setupWithBottomNavigation(bottomNavigation);
+				bottomNavigation.setNotification("1", 3);
+			} else {
+				navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_3);
+				navigationAdapter.setupWithBottomNavigation(bottomNavigation);
+			}
+			return;
+		}
 
 		AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.tab_4),
 				ContextCompat.getDrawable(this, R.drawable.ic_maps_local_bar),
