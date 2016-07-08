@@ -1,6 +1,10 @@
 ## Changelog
 
-### Newest version: 1.3.2
+### Newest version: 1.3.3
+
+* Added a setup method with colors for `AHBottomNavigationAdapter`
+
+### 1.3.2
 
 * Added a new class `AHBottomNavigationAdapter` to inflate menu from resources.
 * Updated example to show how to implement `AHBottomNavigationAdapter`.

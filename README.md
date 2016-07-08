@@ -5,9 +5,8 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ## Demo
 <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo1.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo2.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo3.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo4.gif" width="208" height="368" />
 
-## What's new (1.3.2) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
-* Added a new class `AHBottomNavigationAdapter` to inflate menu from resources.
-* Updated example to show how to implement `AHBottomNavigationAdapter`.
+## What's new (1.3.3) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
+* Added a setup method with colors for `AHBottomNavigationAdapter`
 
 ## Features
 * Follow the bottom navigation guidelines (https://www.google.com/design/spec/components/bottom-navigation.html)
@@ -22,7 +21,7 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ### Gradle
 ```groovy
 dependencies {
-    compile 'com.aurelhubert:ahbottomnavigation:1.3.2'
+    compile 'com.aurelhubert:ahbottomnavigation:1.3.3'
 }
 ```
 ### XML
@@ -110,9 +109,10 @@ bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNaviga
 
 ### With XML menu
 ```java
+int[] tabColors = getApplicationContext().getResources().getIntArray(R.array.tab_colors);
 AHBottomNavigation bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 AHBottomNavigationAdapter navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_3);
-navigationAdapter.setupWithBottomNavigation(bottomNavigation);
+navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
 ```
 
 ## TODO
