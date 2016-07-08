@@ -27,6 +27,7 @@ public class DemoActivity extends AppCompatActivity {
 	private AHBottomNavigationAdapter navigationAdapter;
 	private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
 	private boolean useMenuResource = true;
+	private int[] tabColors;
 
 	// UI
 	private AHBottomNavigationViewPager viewPager;
@@ -50,8 +51,9 @@ public class DemoActivity extends AppCompatActivity {
 		floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_action_button);
 
 		if (useMenuResource) {
+			tabColors = getApplicationContext().getResources().getIntArray(R.array.tab_colors);
 			navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_3);
-			navigationAdapter.setupWithBottomNavigation(bottomNavigation);
+			navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
 		} else {
 			AHBottomNavigationItem item1 = new AHBottomNavigationItem(R.string.tab_1, R.drawable.ic_apps_black_24dp, R.color.color_tab_1);
 			AHBottomNavigationItem item2 = new AHBottomNavigationItem(R.string.tab_2, R.drawable.ic_maps_local_bar, R.color.color_tab_2);
@@ -208,11 +210,11 @@ public class DemoActivity extends AppCompatActivity {
 		if (useMenuResource) {
 			if (addItems) {
 				navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_5);
-				navigationAdapter.setupWithBottomNavigation(bottomNavigation);
+				navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
 				bottomNavigation.setNotification("1", 3);
 			} else {
 				navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_3);
-				navigationAdapter.setupWithBottomNavigation(bottomNavigation);
+				navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
 			}
 			return;
 		}
