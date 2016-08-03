@@ -6,5 +6,6 @@
     <color name="colorBottomNavigationInactive">#747474</color>
     <color name="colorBottomNavigationActiveColored">#FFFFFF</color>
     <color name="colorBottomNavigationInactiveColored">#50FFFFFF</color>
+    <color name="colorBottomNavigationSelectedBackground">#17000000</color>
     <color name="colorBottomNavigationNotification">#F63D2B</color>
 </resources>

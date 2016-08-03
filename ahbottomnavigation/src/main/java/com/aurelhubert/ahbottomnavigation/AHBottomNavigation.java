@@ -3,6 +3,7 @@ package com.aurelhubert.ahbottomnavigation;
 import android.animation.Animator;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -61,6 +62,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private View backgroundColorView;
 	private Animator circleRevealAnim;
 	private boolean colored = false;
+	private boolean selectedBackgroundVisible;
 	private String[] notifications = {"", "", "", "", ""};
 	private boolean isBehaviorTranslationSet = false;
 	private int currentItem = 0;
@@ -113,17 +115,17 @@ public class AHBottomNavigation extends FrameLayout {
 	 */
 	public AHBottomNavigation(Context context) {
 		super(context);
-		init(context);
+		init(context, null);
 	}
 
 	public AHBottomNavigation(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init(context);
+		init(context, attrs);
 	}
 
 	public AHBottomNavigation(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
-		init(context);
+		init(context, attrs);
 	}
 
 	@Override
@@ -171,9 +173,18 @@ public class AHBottomNavigation extends FrameLayout {
 	 *
 	 * @param context
 	 */
-	private void init(Context context) {
+	private void init(Context context, AttributeSet attrs) {
 		this.context = context;
 		resources = this.context.getResources();
+
+		if (attrs != null) {
+			TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AHBottomNavigationBehavior_Params, 0, 0);
+			try {
+				selectedBackgroundVisible = ta.getBoolean(R.styleable.AHBottomNavigationBehavior_Params_selectedBackgroundVisible, false);
+			} finally {
+				ta.recycle();
+			}
+		}
 
 		notificationTextColor = ContextCompat.getColor(context, android.R.color.white);
 		bottomNavigationHeight = (int) resources.getDimension(R.dimen.bottom_navigation_height);
@@ -288,7 +299,7 @@ public class AHBottomNavigation extends FrameLayout {
 		}
 
 		for (int i = 0; i < items.size(); i++) {
-
+			final boolean current = currentItem == i;
 			final int itemIndex = i;
 			AHBottomNavigationItem item = items.get(itemIndex);
 
@@ -309,7 +320,10 @@ public class AHBottomNavigation extends FrameLayout {
 				container.setPadding(0, container.getPaddingTop(), 0, container.getPaddingBottom());
 			}
 
-			if (i == currentItem) {
+			if (current) {
+				if (selectedBackgroundVisible) {
+					view.setSelected(true);
+				}
 				icon.setSelected(true);
 				// Update margins (icon & notification)
 				if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
@@ -332,7 +346,7 @@ public class AHBottomNavigation extends FrameLayout {
 			}
 
 			if (colored) {
-				if (i == currentItem) {
+				if (current) {
 					setBackgroundColor(item.getColor(context));
 					currentColor = item.getColor(context);
 				}
@@ -341,9 +355,9 @@ public class AHBottomNavigation extends FrameLayout {
 			}
 
 			icon.setImageDrawable(AHHelper.getTintDrawable(items.get(i).getDrawable(context),
-					currentItem == i ? itemActiveColor : itemInactiveColor, forceTint));
-			title.setTextColor(currentItem == i ? itemActiveColor : itemInactiveColor);
-			title.setTextSize(TypedValue.COMPLEX_UNIT_PX, currentItem == i ? activeSize : inactiveSize);
+					current ? itemActiveColor : itemInactiveColor, forceTint));
+			title.setTextColor(current ? itemActiveColor : itemInactiveColor);
+			title.setTextSize(TypedValue.COMPLEX_UNIT_PX, current ? activeSize : inactiveSize);
 			view.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -414,6 +428,9 @@ public class AHBottomNavigation extends FrameLayout {
 			}
 
 			if (i == currentItem) {
+				if (selectedBackgroundVisible) {
+					view.setSelected(true);
+				}
 				icon.setSelected(true);
 				// Update margins (icon & notification)
 				if (view.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
@@ -500,11 +517,16 @@ public class AHBottomNavigation extends FrameLayout {
 
 		for (int i = 0; i < views.size(); i++) {
 
+			final View view = views.get(i);
+			if (selectedBackgroundVisible) {
+				view.setSelected(i == itemIndex);
+			}
+
 			if (i == itemIndex) {
 
-				final TextView title = (TextView) views.get(itemIndex).findViewById(R.id.bottom_navigation_item_title);
-				final ImageView icon = (ImageView) views.get(itemIndex).findViewById(R.id.bottom_navigation_item_icon);
-				final TextView notification = (TextView) views.get(itemIndex).findViewById(R.id.bottom_navigation_notification);
+				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_item_title);
+				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_item_icon);
+				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
 
 				icon.setSelected(true);
 				AHHelper.updateTopMargin(icon, inactiveMarginTop, activeMarginTop);
@@ -517,8 +539,8 @@ public class AHBottomNavigation extends FrameLayout {
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && colored) {
 
 					int finalRadius = Math.max(getWidth(), getHeight());
-					int cx = (int) views.get(itemIndex).getX() + views.get(itemIndex).getWidth() / 2;
-					int cy = views.get(itemIndex).getHeight() / 2;
+					int cx = (int) view.getX() + view.getWidth() / 2;
+					int cy = view.getHeight() / 2;
 
 					if (circleRevealAnim != null && circleRevealAnim.isRunning()) {
 						circleRevealAnim.cancel();
@@ -559,9 +581,9 @@ public class AHBottomNavigation extends FrameLayout {
 
 			} else if (i == currentItem) {
 
-				final TextView title = (TextView) views.get(currentItem).findViewById(R.id.bottom_navigation_item_title);
-				final ImageView icon = (ImageView) views.get(currentItem).findViewById(R.id.bottom_navigation_item_icon);
-				final TextView notification = (TextView) views.get(currentItem).findViewById(R.id.bottom_navigation_notification);
+				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_item_title);
+				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_item_icon);
+				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
 
 				icon.setSelected(false);
 				AHHelper.updateTopMargin(icon, activeMarginTop, inactiveMarginTop);
@@ -613,12 +635,17 @@ public class AHBottomNavigation extends FrameLayout {
 
 		for (int i = 0; i < views.size(); i++) {
 
+			final View view = views.get(i);
+			if (selectedBackgroundVisible) {
+				view.setSelected(i == itemIndex);
+			}
+
 			if (i == itemIndex) {
 
-				final FrameLayout container = (FrameLayout) views.get(itemIndex).findViewById(R.id.bottom_navigation_small_container);
-				final TextView title = (TextView) views.get(itemIndex).findViewById(R.id.bottom_navigation_small_item_title);
-				final ImageView icon = (ImageView) views.get(itemIndex).findViewById(R.id.bottom_navigation_small_item_icon);
-				final TextView notification = (TextView) views.get(itemIndex).findViewById(R.id.bottom_navigation_notification);
+				final FrameLayout container = (FrameLayout) view.findViewById(R.id.bottom_navigation_small_container);
+				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_small_item_title);
+				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_small_item_icon);
+				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
 
 				icon.setSelected(true);
 				AHHelper.updateTopMargin(icon, inactiveMargin, activeMarginTop);
@@ -674,10 +701,10 @@ public class AHBottomNavigation extends FrameLayout {
 
 			} else if (i == currentItem) {
 
-				final View container = views.get(currentItem).findViewById(R.id.bottom_navigation_small_container);
-				final TextView title = (TextView) views.get(currentItem).findViewById(R.id.bottom_navigation_small_item_title);
-				final ImageView icon = (ImageView) views.get(currentItem).findViewById(R.id.bottom_navigation_small_item_icon);
-				final TextView notification = (TextView) views.get(currentItem).findViewById(R.id.bottom_navigation_notification);
+				final View container = view.findViewById(R.id.bottom_navigation_small_container);
+				final TextView title = (TextView) view.findViewById(R.id.bottom_navigation_small_item_title);
+				final ImageView icon = (ImageView) view.findViewById(R.id.bottom_navigation_small_item_icon);
+				final TextView notification = (TextView) view.findViewById(R.id.bottom_navigation_notification);
 
 				icon.setSelected(false);
 				AHHelper.updateTopMargin(icon, activeMarginTop, inactiveMargin);
@@ -925,6 +952,14 @@ public class AHBottomNavigation extends FrameLayout {
 	public void setColoredModeColors(@ColorInt int colorActive, @ColorInt int colorInactive) {
 		this.coloredTitleColorActive = colorActive;
 		this.coloredTitleColorInactive = colorInactive;
+		createItems();
+	}
+
+	/**
+	 * Set selected background visibility
+     */
+	public void setSelectedBackgroundVisible(boolean visible) {
+		this.selectedBackgroundVisible = visible;
 		createItems();
 	}
 
