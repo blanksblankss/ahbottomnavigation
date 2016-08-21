@@ -263,7 +263,8 @@ public class DemoActivity extends AppCompatActivity {
 	 * Show or hide selected item background
 	 */
 	public void setForceTitleHide(boolean forceTitleHide) {
-		bottomNavigation.setForceTitlesHide(forceTitleHide);
+		AHBottomNavigation.TitleState state = forceTitleHide ? AHBottomNavigation.TitleState.ALWAYS_HIDE : AHBottomNavigation.TitleState.ALWAYS_SHOW;
+		bottomNavigation.setTitleState(state);
 	}
 
 	/**
