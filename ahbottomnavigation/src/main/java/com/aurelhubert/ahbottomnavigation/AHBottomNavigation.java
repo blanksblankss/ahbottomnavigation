@@ -230,7 +230,7 @@ public class AHBottomNavigation extends FrameLayout {
 		LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, layoutHeight);
 		addView(linearLayout, layoutParams);
 
-		if (items.size() == MIN_ITEMS || forceTitlesDisplay) {
+		if (items.size() <= MIN_ITEMS || forceTitlesDisplay) {
 			createClassicItems(linearLayout);
 		} else {
 			createSmallItems(linearLayout);
