@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="AHBottomNavigationBehavior_Params">
         <attr name="tabLayoutId" format="reference" />
+        <attr name="selectedBackgroundVisible" format="boolean" />
     </declare-styleable>
 </resources>

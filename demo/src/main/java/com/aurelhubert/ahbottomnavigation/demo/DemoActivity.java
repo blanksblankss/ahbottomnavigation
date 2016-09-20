@@ -66,9 +66,6 @@ public class DemoActivity extends AppCompatActivity {
 			bottomNavigation.addItems(bottomNavigationItems);
 		}
 
-		bottomNavigation.setAccentColor(Color.parseColor("#F63D2B"));
-		bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
-
 		bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
 			@Override
 			public boolean onTabSelected(int position, boolean wasSelected) {
@@ -216,23 +213,23 @@ public class DemoActivity extends AppCompatActivity {
 				navigationAdapter = new AHBottomNavigationAdapter(this, R.menu.bottom_navigation_menu_3);
 				navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
 			}
-			return;
-		}
 
-		AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.tab_4),
-				ContextCompat.getDrawable(this, R.drawable.ic_maps_local_bar),
-				ContextCompat.getColor(this, R.color.color_tab_4));
-		AHBottomNavigationItem item5 = new AHBottomNavigationItem(getString(R.string.tab_5),
-				ContextCompat.getDrawable(this, R.drawable.ic_maps_place),
-				ContextCompat.getColor(this, R.color.color_tab_5));
-
-		if (addItems) {
-			bottomNavigation.addItem(item4);
-			bottomNavigation.addItem(item5);
-			bottomNavigation.setNotification("1", 3);
 		} else {
-			bottomNavigation.removeAllItems();
-			bottomNavigation.addItems(bottomNavigationItems);
+			if (addItems) {
+				AHBottomNavigationItem item4 = new AHBottomNavigationItem(getString(R.string.tab_4),
+						ContextCompat.getDrawable(this, R.drawable.ic_maps_local_bar),
+						ContextCompat.getColor(this, R.color.color_tab_4));
+				AHBottomNavigationItem item5 = new AHBottomNavigationItem(getString(R.string.tab_5),
+						ContextCompat.getDrawable(this, R.drawable.ic_maps_place),
+						ContextCompat.getColor(this, R.color.color_tab_5));
+
+				bottomNavigation.addItem(item4);
+				bottomNavigation.addItem(item5);
+				bottomNavigation.setNotification("1", 3);
+			} else {
+				bottomNavigation.removeAllItems();
+				bottomNavigation.addItems(bottomNavigationItems);
+			}
 		}
 	}
 
@@ -245,6 +242,13 @@ public class DemoActivity extends AppCompatActivity {
 		} else {
 			bottomNavigation.hideBottomNavigation(true);
 		}
+	}
+
+	/**
+	 * Show or hide selected item background
+	 */
+	public void updateSelectedBackgroundVisibility(boolean isVisible) {
+		bottomNavigation.setSelectedBackgroundVisible(isVisible);
 	}
 
 	/**

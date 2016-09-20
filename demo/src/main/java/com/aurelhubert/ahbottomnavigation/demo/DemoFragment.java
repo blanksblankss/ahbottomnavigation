@@ -59,6 +59,7 @@ public class DemoFragment extends Fragment {
 		final SwitchCompat switchColored = (SwitchCompat) view.findViewById(R.id.fragment_demo_switch_colored);
 		final SwitchCompat switchFiveItems = (SwitchCompat) view.findViewById(R.id.fragment_demo_switch_five_items);
 		final SwitchCompat showHideBottomNavigation = (SwitchCompat) view.findViewById(R.id.fragment_demo_show_hide);
+		final SwitchCompat showSelectedBackground = (SwitchCompat) view.findViewById(R.id.fragment_demo_selected_background);
 
 		switchColored.setChecked(demoActivity.isBottomNavigationColored());
 		switchFiveItems.setChecked(demoActivity.getBottomNavigationNbItems() == 5);
@@ -79,6 +80,12 @@ public class DemoFragment extends Fragment {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				demoActivity.showOrHideBottomNavigation(isChecked);
+			}
+		});
+		showSelectedBackground.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				demoActivity.updateSelectedBackgroundVisibility(isChecked);
 			}
 		});
 	}
