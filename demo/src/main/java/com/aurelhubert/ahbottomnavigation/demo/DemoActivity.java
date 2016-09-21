@@ -183,7 +183,7 @@ public class DemoActivity extends AppCompatActivity {
 			}
 		}, 3000);
 
-		bottomNavigation.setDefaultBackgroundResource(R.drawable.bottom_navigation_background);
+		//bottomNavigation.setDefaultBackgroundResource(R.drawable.bottom_navigation_background);
 	}
 
 	/**
