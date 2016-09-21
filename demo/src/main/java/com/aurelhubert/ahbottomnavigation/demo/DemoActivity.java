@@ -1,7 +1,6 @@
 package com.aurelhubert.ahbottomnavigation.demo;
 
 import android.animation.Animator;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -183,6 +182,8 @@ public class DemoActivity extends AppCompatActivity {
 						Snackbar.LENGTH_SHORT).show();
 			}
 		}, 3000);
+
+		bottomNavigation.setDefaultBackgroundResource(R.drawable.bottom_navigation_background);
 	}
 
 	/**
