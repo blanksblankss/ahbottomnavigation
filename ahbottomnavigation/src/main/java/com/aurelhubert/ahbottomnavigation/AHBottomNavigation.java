@@ -368,13 +368,13 @@ public class AHBottomNavigation extends FrameLayout {
 			view.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					updateItems(itemIndex, true, true);
+					updateItems(itemIndex, true);
 				}
 			});
 			view.setOnLongClickListener(new OnLongClickListener() {
 				@Override
 				public boolean onLongClick(View view) {
-					updateItems(itemIndex, true, false);
+					updateItems(itemIndex, true);
 					return true;
 				}
 			});
@@ -486,14 +486,7 @@ public class AHBottomNavigation extends FrameLayout {
 			view.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					updateSmallItems(itemIndex, true, true);
-				}
-			});
-			view.setOnLongClickListener(new OnLongClickListener() {
-				@Override
-				public boolean onLongClick(View view) {
-					updateSmallItems(itemIndex, true, false);
-					return true;
+					updateSmallItems(itemIndex, true);
 				}
 			});
 
@@ -514,26 +507,17 @@ public class AHBottomNavigation extends FrameLayout {
 	 * @param useCallback boolean: Use or not the callback
 	 * @param singleTap boolean: True to handle single tap, false to handle long tap
 	 */
-	private void updateItems(final int itemIndex, boolean useCallback, boolean singleTap) {
+	private void updateItems(final int itemIndex, boolean useCallback) {
 
 		if (currentItem == itemIndex) {
 			if (tabSelectedListener != null && useCallback) {
-				if (singleTap) {
-					tabSelectedListener.onTabSelected(itemIndex, true);
-				} else {
-					tabSelectedListener.onLongTabSelected(itemIndex, true);
-				}
+				tabSelectedListener.onTabSelected(itemIndex, true);
 			}
 			return;
 		}
 
 		if (tabSelectedListener != null && useCallback) {
-			boolean selectionAllowed;
-			if (singleTap) {
-				selectionAllowed = tabSelectedListener.onTabSelected(itemIndex, false);
-			} else {
-				selectionAllowed = tabSelectedListener.onLongTabSelected(itemIndex, false);
-			}
+			boolean selectionAllowed = tabSelectedListener.onTabSelected(itemIndex, false);
 			if (!selectionAllowed) return;
 		}
 
@@ -660,26 +644,17 @@ public class AHBottomNavigation extends FrameLayout {
 	 * @param useCallback boolean: Use or not the callback
 	 * @param singleTap boolean: True to handle single tap, false to handle long tap
 	 */
-	private void updateSmallItems(final int itemIndex, boolean useCallback, boolean singleTap) {
+	private void updateSmallItems(final int itemIndex, boolean useCallback) {
 
 		if (currentItem == itemIndex) {
 			if (tabSelectedListener != null && useCallback) {
-				if (singleTap) {
-					tabSelectedListener.onTabSelected(itemIndex, true);
-				} else {
-					tabSelectedListener.onLongTabSelected(itemIndex, true);
-				}
+				tabSelectedListener.onTabSelected(itemIndex, true);
 			}
 			return;
 		}
 
 		if (tabSelectedListener != null && useCallback) {
-			boolean selectionAllowed;
-			if (singleTap) {
-				selectionAllowed = tabSelectedListener.onTabSelected(itemIndex, false);
-			} else {
-				selectionAllowed = tabSelectedListener.onLongTabSelected(itemIndex, false);
-			}
+			boolean selectionAllowed = tabSelectedListener.onTabSelected(itemIndex, false);
 			if (!selectionAllowed) return;
 		}
 
@@ -1100,9 +1075,9 @@ public class AHBottomNavigation extends FrameLayout {
 		}
 
 		if (items.size() == MIN_ITEMS || forceTitlesDisplay) {
-			updateItems(position, useCallback, true);
+			updateItems(position, useCallback);
 		} else {
-			updateSmallItems(position, useCallback, true);
+			updateSmallItems(position, useCallback);
 		}
 	}
 
@@ -1414,15 +1389,6 @@ public class AHBottomNavigation extends FrameLayout {
 		 * @return boolean: true for updating the tab UI, false otherwise
 		 */
 		boolean onTabSelected(int position, boolean wasSelected);
-
-		/**
-		 * Called when a long tab has been done.
-		 *
-		 * @param position    int: Position of the long selected tab
-		 * @param wasSelected boolean: true if the tab was already selected
-		 * @return boolean: true for updating the tab UI, false otherwise
-		 */
-		boolean onLongTabSelected(int position, boolean wasSelected);
 	}
 
 	public interface OnNavigationPositionListener {
