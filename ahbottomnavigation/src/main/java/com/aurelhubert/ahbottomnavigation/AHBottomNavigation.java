@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
@@ -75,6 +76,7 @@ public class AHBottomNavigation extends FrameLayout {
 	// Variables (Styles)
 	private Typeface titleTypeface;
 	private int defaultBackgroundColor = Color.WHITE;
+	private int defaultBackgroundResource = 0;
 	private
 	@ColorInt
 	int itemActiveColor;
@@ -352,7 +354,11 @@ public class AHBottomNavigation extends FrameLayout {
 					currentColor = item.getColor(context);
 				}
 			} else {
-				setBackgroundColor(defaultBackgroundColor);
+				if (defaultBackgroundResource != 0) {
+					setBackgroundResource(defaultBackgroundResource);
+				} else {
+					setBackgroundColor(defaultBackgroundColor);
+				}
 			}
 
 			icon.setImageDrawable(AHHelper.getTintDrawable(items.get(i).getDrawable(context),
@@ -459,7 +465,11 @@ public class AHBottomNavigation extends FrameLayout {
 					currentColor = item.getColor(context);
 				}
 			} else {
-				setBackgroundColor(defaultBackgroundColor);
+				if (defaultBackgroundResource != 0) {
+					setBackgroundResource(defaultBackgroundResource);
+				} else {
+					setBackgroundColor(defaultBackgroundColor);
+				}
 			}
 
 			icon.setImageDrawable(AHHelper.getTintDrawable(items.get(i).getDrawable(context),
@@ -576,7 +586,11 @@ public class AHBottomNavigation extends FrameLayout {
 					AHHelper.updateViewBackgroundColor(this, currentColor,
 							items.get(itemIndex).getColor(context));
 				} else {
-					setBackgroundColor(defaultBackgroundColor);
+					if (defaultBackgroundResource != 0) {
+						setBackgroundResource(defaultBackgroundResource);
+					} else {
+						setBackgroundColor(defaultBackgroundColor);
+					}
 					backgroundColorView.setBackgroundColor(Color.TRANSPARENT);
 				}
 
@@ -600,7 +614,11 @@ public class AHBottomNavigation extends FrameLayout {
 		if (currentItem > 0 && currentItem < items.size()) {
 			currentColor = items.get(currentItem).getColor(context);
 		} else if (currentItem == CURRENT_ITEM_NONE) {
-			setBackgroundColor(defaultBackgroundColor);
+			if (defaultBackgroundResource != 0) {
+				setBackgroundResource(defaultBackgroundResource);
+			} else {
+				setBackgroundColor(defaultBackgroundColor);
+			}
 			backgroundColorView.setBackgroundColor(Color.TRANSPARENT);
 		}
 
@@ -696,7 +714,11 @@ public class AHBottomNavigation extends FrameLayout {
 					AHHelper.updateViewBackgroundColor(this, currentColor,
 							items.get(itemIndex).getColor(context));
 				} else {
-					setBackgroundColor(defaultBackgroundColor);
+					if (defaultBackgroundResource != 0) {
+						setBackgroundResource(defaultBackgroundResource);
+					} else {
+						setBackgroundColor(defaultBackgroundColor);
+					}
 					backgroundColorView.setBackgroundColor(Color.TRANSPARENT);
 				}
 
@@ -724,7 +746,11 @@ public class AHBottomNavigation extends FrameLayout {
 		if (currentItem > 0 && currentItem < items.size()) {
 			currentColor = items.get(currentItem).getColor(context);
 		} else if (currentItem == CURRENT_ITEM_NONE) {
-			setBackgroundColor(defaultBackgroundColor);
+			if (defaultBackgroundResource != 0) {
+				setBackgroundResource(defaultBackgroundResource);
+			} else {
+				setBackgroundColor(defaultBackgroundColor);
+			}
 			backgroundColorView.setBackgroundColor(Color.TRANSPARENT);
 		}
 
@@ -901,6 +927,16 @@ public class AHBottomNavigation extends FrameLayout {
 	 */
 	public void setDefaultBackgroundColor(@ColorInt int defaultBackgroundColor) {
 		this.defaultBackgroundColor = defaultBackgroundColor;
+		createItems();
+	}
+
+	/**
+	 * Set the bottom navigation background resource
+	 *
+	 * @param defaultBackgroundResource The bottom navigation background resource
+	 */
+	public void setDefaultBackgroundResource(@DrawableRes int defaultBackgroundResource) {
+		this.defaultBackgroundResource = defaultBackgroundResource;
 		createItems();
 	}
 
