@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
@@ -19,6 +20,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationViewPager;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DemoActivity extends AppCompatActivity {
 
@@ -159,6 +161,13 @@ public class DemoActivity extends AppCompatActivity {
 				}
 
 				return true;
+			}
+
+			@Override
+			public boolean onLongTabSelected(int position, boolean wasSelected) {
+				String text = String.format(Locale.ENGLISH, "Item at position %d has long tapped!", position);
+				Toast.makeText(DemoActivity.this, text, Toast.LENGTH_SHORT).show();
+				return false;
 			}
 		});
 
