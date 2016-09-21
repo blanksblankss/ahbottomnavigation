@@ -1,6 +1,13 @@
 ## Changelog
 
-### Newest version: 1.3.3
+### Newest version: 1.4.0
+
+* Added `isHidden()` method.
+* Added `setDefaultBackgroundResource(@DrawableRes int defaultBackgroundResource)`
+* Added optional selected item background (PR #132)
+* Displayed classic items for less than 3 items (PR #152)
+
+### 1.3.3
 
 * Added a setup method with colors for `AHBottomNavigationAdapter`
 
