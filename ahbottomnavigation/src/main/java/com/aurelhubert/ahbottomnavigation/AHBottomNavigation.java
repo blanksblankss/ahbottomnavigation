@@ -51,7 +51,7 @@ public class AHBottomNavigation extends FrameLayout {
 
 	// Static
 	private static String TAG = "AHBottomNavigation";
-    private static final String EXCEPTION_ILLEGAL_ARGUMENT = "The position (%d) is out of bounds of the items (%d elements)";
+    private static final String EXCEPTION_INDEX_OUT_OF_BOUNDS = "The position (%d) is out of bounds of the items (%d elements)";
 	private static final int MIN_ITEMS = 3;
 	private static final int MAX_ITEMS = 5;
 
@@ -1263,7 +1263,7 @@ public class AHBottomNavigation extends FrameLayout {
 	@Deprecated
 	public void setNotification(int nbNotification, int itemPosition) {
 		if (itemPosition < 0 || itemPosition > items.size() - 1) {
-            throw new IllegalArgumentException(String.format(Locale.US, EXCEPTION_ILLEGAL_ARGUMENT, itemPosition, items.size()));
+            throw new IndexOutOfBoundsException(String.format(Locale.US, EXCEPTION_INDEX_OUT_OF_BOUNDS, itemPosition, items.size()));
 		}
         final String title = nbNotification == 0 ? "" : String.valueOf(nbNotification);
         notifications.set(itemPosition, Notification.justText(title));
@@ -1278,7 +1278,7 @@ public class AHBottomNavigation extends FrameLayout {
 	 */
 	public void setNotification(String title, int itemPosition) {
         if (itemPosition < 0 || itemPosition > items.size() - 1) {
-            throw new IllegalArgumentException(String.format(Locale.US, EXCEPTION_ILLEGAL_ARGUMENT, itemPosition, items.size()));
+            throw new IndexOutOfBoundsException(String.format(Locale.US, EXCEPTION_INDEX_OUT_OF_BOUNDS, itemPosition, items.size()));
         }
         notifications.set(itemPosition, Notification.justText(title));
         updateNotifications(false, itemPosition);
@@ -1292,7 +1292,7 @@ public class AHBottomNavigation extends FrameLayout {
      */
 	public void setNotification(Notification notification, int itemPosition) {
 		if (itemPosition < 0 || itemPosition > items.size() - 1) {
-            throw new IllegalArgumentException(String.format(Locale.US, EXCEPTION_ILLEGAL_ARGUMENT, itemPosition, items.size()));
+            throw new IndexOutOfBoundsException(String.format(Locale.US, EXCEPTION_INDEX_OUT_OF_BOUNDS, itemPosition, items.size()));
 		}
 		notifications.set(itemPosition, notification);
 		updateNotifications(true, itemPosition);
