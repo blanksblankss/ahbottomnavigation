@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author repitch
  */
-public class Notification implements Parcelable {
+public class AHNotification implements Parcelable {
 
     @Nullable
     private String text; // can be null, so notification will not be shown
@@ -23,11 +23,11 @@ public class Notification implements Parcelable {
     @ColorInt
     private int backgroundColor; // if 0 then use default value
 
-    private Notification() {
+    private AHNotification() {
         // empty
     }
 
-    private Notification(Parcel in) {
+    private AHNotification(Parcel in) {
         text = in.readString();
         textColor = in.readInt();
         backgroundColor = in.readInt();
@@ -49,18 +49,18 @@ public class Notification implements Parcelable {
         return backgroundColor;
     }
 
-    public static Notification justText(String text) {
+    public static AHNotification justText(String text) {
         return newBuilder().setText(text).build();
     }
 
     public static Builder newBuilder() {
-        return new Notification().new Builder();
+        return new AHNotification().new Builder();
     }
 
-    public static List<Notification> generateEmptyList(int size) {
-        List<Notification> notificationList = new ArrayList<>();
+    public static List<AHNotification> generateEmptyList(int size) {
+        List<AHNotification> notificationList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            notificationList.add(Notification.newBuilder().build());
+            notificationList.add(AHNotification.newBuilder().build());
         }
         return notificationList;
     }
@@ -83,34 +83,34 @@ public class Notification implements Parcelable {
         }
 
         public Builder setText(String text) {
-            Notification.this.text = text;
+            AHNotification.this.text = text;
             return this;
         }
 
         public Builder setTextColor(@ColorInt int textColor) {
-            Notification.this.textColor = textColor;
+            AHNotification.this.textColor = textColor;
             return this;
         }
 
         public Builder setBackgroundColor(@ColorInt int backgroundColor) {
-            Notification.this.backgroundColor = backgroundColor;
+            AHNotification.this.backgroundColor = backgroundColor;
             return this;
         }
 
-        public Notification build() {
-            return Notification.this;
+        public AHNotification build() {
+            return AHNotification.this;
         }
     }
 
-    public static final Creator<Notification> CREATOR = new Creator<Notification>() {
+    public static final Creator<AHNotification> CREATOR = new Creator<AHNotification>() {
         @Override
-        public Notification createFromParcel(Parcel in) {
-            return new Notification(in);
+        public AHNotification createFromParcel(Parcel in) {
+            return new AHNotification(in);
         }
 
         @Override
-        public Notification[] newArray(int size) {
-            return new Notification[size];
+        public AHNotification[] newArray(int size) {
+            return new AHNotification[size];
         }
     };
 

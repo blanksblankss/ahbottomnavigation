@@ -6,13 +6,13 @@ import android.support.annotation.Nullable;
 /**
  * @author repitch
  */
-public final class NotificationHelper {
+public final class AHNotificationHelper {
 
-    private NotificationHelper() {
+    private AHNotificationHelper() {
         // empty
     }
 
-    public static int getTextColor(@Nullable Notification notification, @ColorInt int defaultTextColor) {
+    public static int getTextColor(@Nullable AHNotification notification, @ColorInt int defaultTextColor) {
         if (notification == null) {
             return defaultTextColor;
         }
@@ -20,7 +20,7 @@ public final class NotificationHelper {
         return textColor == 0 ? defaultTextColor : textColor;
     }
 
-    public static int getBackgroundColor(@Nullable Notification notification, @ColorInt int defaultBackgroundColor) {
+    public static int getBackgroundColor(@Nullable AHNotification notification, @ColorInt int defaultBackgroundColor) {
         if (notification == null) {
             return defaultBackgroundColor;
         }
