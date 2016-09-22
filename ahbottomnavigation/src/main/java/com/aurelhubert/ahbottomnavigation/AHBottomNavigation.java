@@ -32,6 +32,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.aurelhubert.ahbottomnavigation.notification.Notification;
+import com.aurelhubert.ahbottomnavigation.notification.NotificationHelper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +68,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private boolean colored = false;
 	private boolean selectedBackgroundVisible = false;
 	private boolean isHidden = false;
-	private String[] notifications = {"", "", "", "", ""};
+	private List<Notification> notifications = Notification.generateEmptyList(MAX_ITEMS);
 	private boolean isBehaviorTranslationSet = false;
 	private int currentItem = 0;
 	private int currentColor = 0;
@@ -152,7 +155,7 @@ public class AHBottomNavigation extends FrameLayout {
 		Bundle bundle = new Bundle();
 		bundle.putParcelable("superState", super.onSaveInstanceState());
 		bundle.putInt("current_item", currentItem);
-		bundle.putStringArray("notifications", notifications);
+        bundle.putParcelableArrayList("notifications", (ArrayList<Notification>) notifications);
 		return bundle;
 	}
 
@@ -161,7 +164,7 @@ public class AHBottomNavigation extends FrameLayout {
 		if (state instanceof Bundle) {
 			Bundle bundle = (Bundle) state;
 			currentItem = bundle.getInt("current_item");
-			notifications = bundle.getStringArray("notifications");
+            notifications = bundle.getParcelableArrayList("notifications");
 			state = bundle.getParcelable("superState");
 		}
 		super.onRestoreInstanceState(state);
@@ -781,13 +784,17 @@ public class AHBottomNavigation extends FrameLayout {
 				continue;
 			}
 
+			final Notification notificationItem = notifications.get(i);
+			final int currentTextColor = NotificationHelper.getTextColor(notificationItem, notificationTextColor);
+			final int currentBackgroundColor = NotificationHelper.getBackgroundColor(notificationItem, notificationBackgroundColor);
+
 			TextView notification = (TextView) views.get(i).findViewById(R.id.bottom_navigation_notification);
 
 			String currentValue = notification.getText().toString();
-			boolean animate = !currentValue.equals(String.valueOf(notifications[i]));
+			boolean animate = !currentValue.equals(String.valueOf(notificationItem.getText()));
 
 			if (updateStyle) {
-				notification.setTextColor(notificationTextColor);
+				notification.setTextColor(currentTextColor);
 				if (notificationTypeface != null) {
 					notification.setTypeface(notificationTypeface);
 				} else {
@@ -802,19 +809,19 @@ public class AHBottomNavigation extends FrameLayout {
 						notification.setBackgroundDrawable(notificationBackgroundDrawable);
 					}
 
-				} else if (notificationBackgroundColor != 0) {
+				} else if (currentBackgroundColor != 0) {
 					Drawable defautlDrawable = ContextCompat.getDrawable(context, R.drawable.notification_background);
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 						notification.setBackground(AHHelper.getTintDrawable(defautlDrawable,
-								notificationBackgroundColor, forceTint));
+								currentBackgroundColor, forceTint));
 					} else {
 						notification.setBackgroundDrawable(AHHelper.getTintDrawable(defautlDrawable,
-								notificationBackgroundColor, forceTint));
+								currentBackgroundColor, forceTint));
 					}
 				}
 			}
 
-			if (notifications[i].length() == 0 && notification.getText().length() > 0) {
+			if (notificationItem.isEmpty() && notification.getText().length() > 0) {
 				notification.setText("");
 				if (animate) {
 					notification.animate()
@@ -825,8 +832,8 @@ public class AHBottomNavigation extends FrameLayout {
 							.setDuration(150)
 							.start();
 				}
-			} else if (notifications[i].length() > 0) {
-				notification.setText(String.valueOf(notifications[i]));
+			} else if (!notificationItem.isEmpty()) {
+				notification.setText(String.valueOf(notificationItem.getText()));
 				if (animate) {
 					notification.setScaleX(0);
 					notification.setScaleY(0);
@@ -1257,19 +1264,37 @@ public class AHBottomNavigation extends FrameLayout {
 			Log.w(TAG, "The position is out of bounds of the items (" + items.size() + " elements)");
 			return;
 		}
-		notifications[itemPosition] = nbNotification == 0 ? "" : String.valueOf(nbNotification);
+        final String title = nbNotification == 0 ? "" : String.valueOf(nbNotification);
+        notifications.set(itemPosition, Notification.justText(title));
 		updateNotifications(false, itemPosition);
 	}
 
 	/**
-	 * Set Notification content
+	 * Set Notification text
 	 *
 	 * @param title        String
 	 * @param itemPosition int
 	 */
 	public void setNotification(String title, int itemPosition) {
-		notifications[itemPosition] = title;
-		updateNotifications(false, itemPosition);
+        if (itemPosition < 0 || itemPosition > items.size() - 1) {
+            throw new RuntimeException("The position is out of bounds of the items (" + items.size() + " elements)");
+        }
+        notifications.set(itemPosition, Notification.justText(title));
+        updateNotifications(false, itemPosition);
+    }
+
+    /**
+     * Set fully customized Notification
+     *
+     * @param notification Notification
+     * @param itemPosition int
+     */
+	public void setNotification(Notification notification, int itemPosition) {
+		if (itemPosition < 0 || itemPosition > items.size() - 1) {
+			throw new RuntimeException("The position is out of bounds of the items (" + items.size() + " elements)");
+		}
+		notifications.set(itemPosition, notification);
+		updateNotifications(true, itemPosition);
 	}
 
 	/**
