@@ -13,6 +13,9 @@
     <color name="color_tab_4">#6C4A42</color>
     <color name="color_tab_5">#F63D2B</color>
 
+    <color name="color_notification_back">#ffcd33</color>
+    <color name="color_notification_text">#3E4757</color>
+
     <array name="tab_colors">
         <item name="tab_1">#455C65</item>
         <item name="tab_2">#00886A</item>
