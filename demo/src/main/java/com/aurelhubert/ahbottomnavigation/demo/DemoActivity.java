@@ -179,7 +179,7 @@ public class DemoActivity extends AppCompatActivity {
 			@Override
 			public void run() {
 				// Setting custom colors for notification
-				AHNotification notification = AHNotification.newBuilder()
+				AHNotification notification = new AHNotification.Builder()
 						.setText(":)")
 						.setBackgroundColor(ContextCompat.getColor(DemoActivity.this, R.color.color_notification_back))
 						.setTextColor(ContextCompat.getColor(DemoActivity.this, R.color.color_notification_text))

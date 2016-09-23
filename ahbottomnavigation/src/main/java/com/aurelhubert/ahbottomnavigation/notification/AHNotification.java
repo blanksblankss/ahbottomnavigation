@@ -50,17 +50,13 @@ public class AHNotification implements Parcelable {
     }
 
     public static AHNotification justText(String text) {
-        return newBuilder().setText(text).build();
-    }
-
-    public static Builder newBuilder() {
-        return new AHNotification().new Builder();
+        return new Builder().setText(text).build();
     }
 
     public static List<AHNotification> generateEmptyList(int size) {
         List<AHNotification> notificationList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            notificationList.add(AHNotification.newBuilder().build());
+            notificationList.add(new Builder().build());
         }
         return notificationList;
     }
@@ -77,28 +73,35 @@ public class AHNotification implements Parcelable {
         dest.writeInt(backgroundColor);
     }
 
-    public class Builder {
-        private Builder() {
-            // empty
-        }
+    public static class Builder {
+        @Nullable
+        private String text;
+        @ColorInt
+        private int textColor;
+        @ColorInt
+        private int backgroundColor;
 
         public Builder setText(String text) {
-            AHNotification.this.text = text;
+            this.text = text;
             return this;
         }
 
         public Builder setTextColor(@ColorInt int textColor) {
-            AHNotification.this.textColor = textColor;
+            this.textColor = textColor;
             return this;
         }
 
         public Builder setBackgroundColor(@ColorInt int backgroundColor) {
-            AHNotification.this.backgroundColor = backgroundColor;
+            this.backgroundColor = backgroundColor;
             return this;
         }
 
         public AHNotification build() {
-            return AHNotification.this;
+            AHNotification notification = new AHNotification();
+            notification.text = text;
+            notification.textColor = textColor;
+            notification.backgroundColor = backgroundColor;
+            return notification;
         }
     }
 
