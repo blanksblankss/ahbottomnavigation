@@ -1294,6 +1294,9 @@ public class AHBottomNavigation extends FrameLayout {
 		if (itemPosition < 0 || itemPosition > items.size() - 1) {
             throw new IndexOutOfBoundsException(String.format(Locale.US, EXCEPTION_INDEX_OUT_OF_BOUNDS, itemPosition, items.size()));
 		}
+        if (notification == null) {
+            notification = new AHNotification(); // instead of null, use empty notification
+        }
 		notifications.set(itemPosition, notification);
 		updateNotifications(true, itemPosition);
 	}

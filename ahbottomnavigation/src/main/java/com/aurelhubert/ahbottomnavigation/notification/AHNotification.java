@@ -23,7 +23,7 @@ public class AHNotification implements Parcelable {
     @ColorInt
     private int backgroundColor; // if 0 then use default value
 
-    private AHNotification() {
+    public AHNotification() {
         // empty
     }
 
@@ -56,7 +56,7 @@ public class AHNotification implements Parcelable {
     public static List<AHNotification> generateEmptyList(int size) {
         List<AHNotification> notificationList = new ArrayList<>();
         for (int i = 0; i < size; i++) {
-            notificationList.add(new Builder().build());
+            notificationList.add(new AHNotification());
         }
         return notificationList;
     }
