@@ -253,6 +253,13 @@ public class DemoActivity extends AppCompatActivity {
 	}
 
 	/**
+	 * Show or hide selected item background
+	 */
+	public void setForceTitleHide(boolean forceTitleHide) {
+		bottomNavigation.setForceTitlesHide(forceTitleHide);
+	}
+
+	/**
 	 * Return the number of items in the bottom navigation
 	 */
 	public int getBottomNavigationNbItems() {
