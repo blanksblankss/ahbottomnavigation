@@ -100,6 +100,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private float selectedItemWidth, notSelectedItemWidth;
 	private boolean forceTint = false;
 	private boolean forceTitlesDisplay = false;
+    private boolean forceTitlesHide = false;
 
 	// Notifications
 	private
@@ -244,7 +245,7 @@ public class AHBottomNavigation extends FrameLayout {
 		LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, layoutHeight);
 		addView(linearLayout, layoutParams);
 
-		if (items.size() <= MIN_ITEMS || forceTitlesDisplay) {
+		if (isClassic()) {
 			createClassicItems(linearLayout);
 		} else {
 			createSmallItems(linearLayout);
@@ -258,6 +259,15 @@ public class AHBottomNavigation extends FrameLayout {
 			}
 		});
 	}
+
+    /**
+     * Check if items must be classic
+     *
+     * @return true if classic (icon + title)
+     */
+    private boolean isClassic() {
+        return forceTitlesDisplay || items.size() <= MIN_ITEMS && !forceTitlesHide;
+    }
 
 	/**
 	 * Create classic items (only 3 items in the bottom navigation)
@@ -1074,7 +1084,7 @@ public class AHBottomNavigation extends FrameLayout {
 			return;
 		}
 
-		if (items.size() == MIN_ITEMS || forceTitlesDisplay) {
+		if (isClassic()) {
 			updateItems(position, useCallback);
 		} else {
 			updateSmallItems(position, useCallback);
@@ -1210,6 +1220,26 @@ public class AHBottomNavigation extends FrameLayout {
 		this.forceTitlesDisplay = forceTitlesDisplay;
 		createItems();
 	}
+
+    /**
+     * Return if we force the titles to be hidden
+     *
+     * @return Boolean
+     */
+    public boolean isForceTitlesHide() {
+        return forceTitlesHide;
+    }
+
+    /**
+     * Force the titles to be hidden (don't use the classic behavior)
+     * Note: Against Material Design guidelines
+     *
+     * @param forceTitlesHide Boolean
+     */
+    public void setForceTitlesHide(boolean forceTitlesHide) {
+        this.forceTitlesHide = forceTitlesHide;
+        createItems();
+    }
 
 	/**
 	 * Set AHOnTabSelectedListener
