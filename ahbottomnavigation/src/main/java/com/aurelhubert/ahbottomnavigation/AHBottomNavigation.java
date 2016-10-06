@@ -1,6 +1,8 @@
 package com.aurelhubert.ahbottomnavigation;
 
 import android.animation.Animator;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -18,13 +20,16 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.FrameLayout;
@@ -69,6 +74,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private Animator circleRevealAnim;
 	private boolean colored = false;
 	private boolean selectedBackgroundVisible = false;
+	private boolean translucentNavigationEnabled;
 	private boolean isHidden = false;
 	private List<AHNotification> notifications = AHNotification.generateEmptyList(MAX_ITEMS);
 	private boolean isBehaviorTranslationSet = false;
@@ -190,6 +196,7 @@ public class AHBottomNavigation extends FrameLayout {
 			TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AHBottomNavigationBehavior_Params, 0, 0);
 			try {
 				selectedBackgroundVisible = ta.getBoolean(R.styleable.AHBottomNavigationBehavior_Params_selectedBackgroundVisible, false);
+				translucentNavigationEnabled = ta.getBoolean(R.styleable.AHBottomNavigationBehavior_Params_translucentNavigationEnabled, false);
 			} finally {
 				ta.recycle();
 			}
@@ -239,7 +246,7 @@ public class AHBottomNavigation extends FrameLayout {
 		backgroundColorView = new View(context);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			LayoutParams backgroundLayoutParams = new LayoutParams(
-					ViewGroup.LayoutParams.MATCH_PARENT, layoutHeight);
+					ViewGroup.LayoutParams.MATCH_PARENT, calculateHeight(layoutHeight));
 			addView(backgroundColorView, backgroundLayoutParams);
 		}
 
@@ -264,6 +271,59 @@ public class AHBottomNavigation extends FrameLayout {
 			}
 		});
 	}
+
+	// updated
+
+	@SuppressLint("NewApi")
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	private int calculateHeight(int layoutHeight) {
+		if(!translucentNavigationEnabled) return layoutHeight;
+
+		int navigationBarHeight = 0;
+		int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			navigationBarHeight = resources.getDimensionPixelSize(resourceId);
+		}
+
+		int[] attrs = {android.R.attr.fitsSystemWindows, android.R.attr.windowTranslucentNavigation};
+		TypedArray typedValue = getContext().getTheme().obtainStyledAttributes(attrs);
+
+		@SuppressWarnings("ResourceType")
+		boolean fitWindow = typedValue.getBoolean(0, false);
+
+		@SuppressWarnings("ResourceType")
+		boolean translucentNavigation = typedValue.getBoolean(1, true);
+
+		if(hasImmersive() /*&& !fitWindow*/ && translucentNavigation) {
+			layoutHeight += navigationBarHeight;
+		}
+
+		typedValue.recycle();
+
+		return layoutHeight;
+	}
+
+	@SuppressLint("NewApi")
+	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
+	public boolean hasImmersive() {
+		Display d = ((WindowManager)getContext().getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+
+		DisplayMetrics realDisplayMetrics = new DisplayMetrics();
+		d.getRealMetrics(realDisplayMetrics);
+
+		int realHeight = realDisplayMetrics.heightPixels;
+		int realWidth = realDisplayMetrics.widthPixels;
+
+		DisplayMetrics displayMetrics = new DisplayMetrics();
+		d.getMetrics(displayMetrics);
+
+		int displayHeight = displayMetrics.heightPixels;
+		int displayWidth = displayMetrics.widthPixels;
+
+		return (realWidth > displayWidth) || (realHeight > displayHeight);
+	}
+
+	// updated
 
     /**
      * Check if items must be classic

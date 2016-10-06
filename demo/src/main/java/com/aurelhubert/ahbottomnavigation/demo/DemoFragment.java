@@ -1,5 +1,7 @@
 package com.aurelhubert.ahbottomnavigation.demo;
 
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -61,10 +63,27 @@ public class DemoFragment extends Fragment {
 		final SwitchCompat showHideBottomNavigation = (SwitchCompat) view.findViewById(R.id.fragment_demo_show_hide);
 		final SwitchCompat showSelectedBackground = (SwitchCompat) view.findViewById(R.id.fragment_demo_selected_background);
 		final SwitchCompat switchForceTitleHide = (SwitchCompat) view.findViewById(R.id.fragment_demo_force_title_hide);
+		final SwitchCompat switchTranslucentNavigation = (SwitchCompat) view.findViewById(R.id.fragment_demo_translucent_navigation);
 
 		switchColored.setChecked(demoActivity.isBottomNavigationColored());
 		switchFiveItems.setChecked(demoActivity.getBottomNavigationNbItems() == 5);
+		switchTranslucentNavigation.setChecked(getActivity()
+				.getSharedPreferences("shared", Context.MODE_PRIVATE)
+				.getBoolean("translucentNavigation", false));
+		switchTranslucentNavigation.setVisibility(
+				Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? View.VISIBLE : View.GONE);
 
+		switchTranslucentNavigation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				getActivity()
+						.getSharedPreferences("shared", Context.MODE_PRIVATE)
+						.edit()
+						.putBoolean("translucentNavigation", isChecked)
+						.apply();
+				demoActivity.reload();
+			}
+		});
 		switchColored.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
