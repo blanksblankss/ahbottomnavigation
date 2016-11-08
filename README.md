@@ -5,8 +5,10 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ## Demo
 <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo1.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo2.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo3.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo4.gif" width="208" height="368" />
 
-## What's new (1.5.1) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
-* Fixed ripple effect bug (API 21+)
+## What's new (2.0.0) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
+* *BREAKING!* 3 states for titles: `SHOW_WHEN_ACTIVE`, `ALWAYS_SHOW` & `ALWAYS_HIDE` (PR #140)
+* Color under the navigation bar (PR #166)
+* Fix CoordinatorLayout with FloatingActionButton: use `manageFloatingActionButtonBehavior`
 
 ## Features
 * Follow the bottom navigation guidelines (https://www.google.com/design/spec/components/bottom-navigation.html)
@@ -21,7 +23,7 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ### Gradle
 ```groovy
 dependencies {
-    compile 'com.aurelhubert:ahbottomnavigation:1.5.1'
+    compile 'com.aurelhubert:ahbottomnavigation:2.0.0'
 }
 ```
 ### XML
@@ -69,6 +71,9 @@ bottomNavigation.setDefaultBackgroundColor(Color.parseColor("#FEFEFE"));
 // Disable the translation inside the CoordinatorLayout
 bottomNavigation.setBehaviorTranslationEnabled(false);
 
+// Enable the translation of the FloatingActionButton
+bottomNavigation.manageFloatingActionButtonBehavior(floatingActionButton);
+
 // Change colors
 bottomNavigation.setAccentColor(Color.parseColor("#F63D2B"));
 bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
@@ -76,10 +81,10 @@ bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
 // Force to tint the drawable (useful for font with icon for example)
 bottomNavigation.setForceTint(true);
 
-// Force the titles to be displayed (against Material Design guidelines!)
-bottomNavigation.setForceTitlesDisplay(true);
-// Or force the titles to be hidden (against Material Design guidelines, too!)
-bottomNavigation.setForceTitlesHide(true);
+// Manage titles
+bottomNavigation.setTitleState(AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE);
+bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
+bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_HIDE);
 
 // Use colored navigation with circle reveal effect
 bottomNavigation.setColored(true);
@@ -124,16 +129,12 @@ navigationAdapter.setupWithBottomNavigation(bottomNavigation, tabColors);
 ```
 
 ## TODO
-
-* Add color under the navigation bar.
 * Manage tablet
 
 ## Contributions
-
 Feel free to create issues / pull requests.
 
 ## License
-
 ```
 AHBottomNavigation library for Android
 Copyright (c) 2016 Aurelien Hubert (http://github.com/aurelhubert).
