@@ -1,6 +1,8 @@
 package com.aurelhubert.ahbottomnavigation.demo;
 
 import android.animation.Animator;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -37,6 +39,9 @@ public class DemoActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		boolean enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE).
+				getBoolean("translucentNavigation", false);
+		setTheme(enabledTranslucentNavigation ? R.style.AppTheme_TranslucentNavigation : R.style.AppTheme);
 		setContentView(R.layout.activity_home);
 		initUI();
 	}
@@ -265,6 +270,14 @@ public class DemoActivity extends AppCompatActivity {
 	public void setForceTitleHide(boolean forceTitleHide) {
 		AHBottomNavigation.TitleState state = forceTitleHide ? AHBottomNavigation.TitleState.ALWAYS_HIDE : AHBottomNavigation.TitleState.ALWAYS_SHOW;
 		bottomNavigation.setTitleState(state);
+	}
+
+	/**
+	 * Reload activity
+	 */
+	public void reload() {
+		startActivity(new Intent(this, DemoActivity.class));
+		finish();
 	}
 
 	/**
