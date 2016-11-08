@@ -1261,6 +1261,20 @@ public class AHBottomNavigation extends FrameLayout {
 	}
 
 	/**
+	 * Return if the translucent navigation is enabled
+	 */
+	public boolean isTranslucentNavigationEnabled() {
+		return translucentNavigationEnabled;
+	}
+
+	/**
+	 * Set the translucent navigation value
+	 */
+	public void setTranslucentNavigationEnabled(boolean translucentNavigationEnabled) {
+		this.translucentNavigationEnabled = translucentNavigationEnabled;
+	}
+
+	/**
 	 * Return if the tint should be forced (with setColorFilter)
 	 *
 	 * @return Boolean
