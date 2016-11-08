@@ -16,6 +16,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
@@ -95,37 +96,21 @@ public class AHBottomNavigation extends FrameLayout {
 	private Typeface titleTypeface;
 	private int defaultBackgroundColor = Color.WHITE;
 	private int defaultBackgroundResource = 0;
-	private
-	@ColorInt
-	int itemActiveColor;
-	private
-	@ColorInt
-	int itemInactiveColor;
-	private
-	@ColorInt
-	int titleColorActive;
-	private
-	@ColorInt
-	int titleColorInactive;
-	private
-	@ColorInt
-	int coloredTitleColorActive;
-	private
-	@ColorInt
-	int coloredTitleColorInactive;
+	private @ColorInt int itemActiveColor;
+	private @ColorInt int itemInactiveColor;
+	private @ColorInt int titleColorActive;
+	private @ColorInt int titleColorInactive;
+	private @ColorInt int coloredTitleColorActive;
+	private @ColorInt int coloredTitleColorInactive;
 	private float titleActiveTextSize, titleInactiveTextSize;
-	private int bottomNavigationHeight;
+	private int bottomNavigationHeight, navigationBarHeight = 0;
 	private float selectedItemWidth, notSelectedItemWidth;
 	private boolean forceTint = false;
 	private TitleState titleState = TitleState.SHOW_WHEN_ACTIVE;
 
 	// Notifications
-	private
-	@ColorInt
-	int notificationTextColor;
-	private
-	@ColorInt
-	int notificationBackgroundColor;
+	private @ColorInt int notificationTextColor;
+	private @ColorInt int notificationBackgroundColor;
 	private Drawable notificationBackgroundDrawable;
 	private Typeface notificationTypeface;
 	private int notificationActiveMarginLeft, notificationInactiveMarginLeft;
@@ -254,6 +239,7 @@ public class AHBottomNavigation extends FrameLayout {
 			LayoutParams backgroundLayoutParams = new LayoutParams(
 					ViewGroup.LayoutParams.MATCH_PARENT, calculateHeight(layoutHeight));
 			addView(backgroundColorView, backgroundLayoutParams);
+			bottomNavigationHeight = layoutHeight;
 		}
 
 		LinearLayout linearLayout = new LinearLayout(context);
@@ -279,14 +265,11 @@ public class AHBottomNavigation extends FrameLayout {
 		});
 	}
 
-	// updated
-
 	@SuppressLint("NewApi")
 	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	private int calculateHeight(int layoutHeight) {
 		if(!translucentNavigationEnabled) return layoutHeight;
 
-		int navigationBarHeight = 0;
 		int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
 		if (resourceId > 0) {
 			navigationBarHeight = resources.getDimensionPixelSize(resourceId);
@@ -715,12 +698,6 @@ public class AHBottomNavigation extends FrameLayout {
 			}
 			backgroundColorView.setBackgroundColor(Color.TRANSPARENT);
 		}
-
-		/*
-		if (tabSelectedListener != null && useCallback) {
-			tabSelectedListener.onTabSelected(itemIndex, false);
-		}
-		*/
 	}
 
 	/**
@@ -863,12 +840,6 @@ public class AHBottomNavigation extends FrameLayout {
 			}
 			backgroundColorView.setBackgroundColor(Color.TRANSPARENT);
 		}
-
-		/*
-		if (tabSelectedListener != null && useCallback) {
-			tabSelectedListener.onTabSelected(itemIndex, false);
-		}
-		*/
 	}
 
 	/**
@@ -1206,9 +1177,9 @@ public class AHBottomNavigation extends FrameLayout {
 		if (getParent() instanceof CoordinatorLayout) {
 			ViewGroup.LayoutParams params = getLayoutParams();
 			if (bottomNavigationBehavior == null) {
-				bottomNavigationBehavior = new AHBottomNavigationBehavior<>(behaviorTranslationEnabled);
+				bottomNavigationBehavior = new AHBottomNavigationBehavior<>(behaviorTranslationEnabled, navigationBarHeight);
 			} else {
-				bottomNavigationBehavior.setBehaviorTranslationEnabled(behaviorTranslationEnabled);
+				bottomNavigationBehavior.setBehaviorTranslationEnabled(behaviorTranslationEnabled, navigationBarHeight);
 			}
 			if (navigationPositionListener != null) {
 				bottomNavigationBehavior.setOnNavigationPositionListener(navigationPositionListener);
@@ -1219,6 +1190,18 @@ public class AHBottomNavigation extends FrameLayout {
 				bottomNavigationBehavior.hideView(this, bottomNavigationHeight, hideBottomNavigationWithAnimation);
 				isHidden = true;
 			}
+		}
+	}
+
+	/**
+	 * Manage the floating action button behavior with AHBottomNavigation
+	 * @param fab Floating Action Button
+	 */
+	public void manageFloatingActionButtonBehavior(FloatingActionButton fab) {
+		if (fab.getParent() instanceof CoordinatorLayout) {
+			AHBottomNavigationFABBehavior fabBehavior = new AHBottomNavigationFABBehavior(navigationBarHeight);
+			((CoordinatorLayout.LayoutParams) fab.getLayoutParams())
+					.setBehavior(fabBehavior);
 		}
 	}
 
