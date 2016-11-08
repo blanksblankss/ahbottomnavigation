@@ -10,7 +10,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
@@ -30,6 +29,7 @@ public class DemoActivity extends AppCompatActivity {
 	private ArrayList<AHBottomNavigationItem> bottomNavigationItems = new ArrayList<>();
 	private boolean useMenuResource = true;
 	private int[] tabColors;
+	private Handler handler = new Handler();
 
 	// UI
 	private AHBottomNavigationViewPager viewPager;
@@ -39,11 +39,17 @@ public class DemoActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE).
-				getBoolean("translucentNavigation", false);
+		boolean enabledTranslucentNavigation = getSharedPreferences("shared", Context.MODE_PRIVATE)
+				.getBoolean("translucentNavigation", false);
 		setTheme(enabledTranslucentNavigation ? R.style.AppTheme_TranslucentNavigation : R.style.AppTheme);
 		setContentView(R.layout.activity_home);
 		initUI();
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		handler.removeCallbacksAndMessages(null);
 	}
 
 	/**
@@ -70,6 +76,8 @@ public class DemoActivity extends AppCompatActivity {
 
 			bottomNavigation.addItems(bottomNavigationItems);
 		}
+
+		bottomNavigation.manageFloatingActionButtonBehavior(floatingActionButton);
 
 		bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
 			@Override
@@ -167,11 +175,13 @@ public class DemoActivity extends AppCompatActivity {
 			}
 		});
 
+		/*
 		bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNavigationPositionListener() {
 			@Override public void onPositionChange(int y) {
 				Log.d("DemoActivity", "BottomNavigation Position: " + y);
 			}
 		});
+		*/
 
 		viewPager.setOffscreenPageLimit(4);
 		adapter = new DemoViewPagerAdapter(getSupportFragmentManager());
@@ -179,7 +189,6 @@ public class DemoActivity extends AppCompatActivity {
 
 		currentFragment = adapter.getCurrentFragment();
 
-		final Handler handler = new Handler();
 		handler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
@@ -192,6 +201,8 @@ public class DemoActivity extends AppCompatActivity {
 				bottomNavigation.setNotification(notification, 1);
 				Snackbar.make(bottomNavigation, "Snackbar with bottom navigation",
 						Snackbar.LENGTH_SHORT).show();
+
+				handler.postDelayed(this, 5000);
 			}
 		}, 3000);
 
