@@ -1,7 +1,7 @@
 ## Changelog
 
 ### Newest version: 2.0.0
-* *BREAKING!* 3 states for titles: `SHOW_WHEN_ACTIVE`, `ALWAYS_SHOW` & `ALWAYS_HIDE` (PR #140)
+* **BREAKING!** 3 states for titles: `SHOW_WHEN_ACTIVE`, `ALWAYS_SHOW` & `ALWAYS_HIDE` (PR #140)
 * Color under the navigation bar (PR #166)
 * Fix CoordinatorLayout with FloatingActionButton: use `manageFloatingActionButtonBehavior`
 

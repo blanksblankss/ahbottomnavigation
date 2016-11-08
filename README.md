@@ -6,7 +6,7 @@ Library to implement the Bottom Navigation component from Material Design guidel
 <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo1.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo2.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo3.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo4.gif" width="208" height="368" />
 
 ## What's new (2.0.0) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
-* *BREAKING!* 3 states for titles: `SHOW_WHEN_ACTIVE`, `ALWAYS_SHOW` & `ALWAYS_HIDE` (PR #140)
+* **BREAKING!** 3 states for titles: `SHOW_WHEN_ACTIVE`, `ALWAYS_SHOW` & `ALWAYS_HIDE` (PR #140)
 * Color under the navigation bar (PR #166)
 * Fix CoordinatorLayout with FloatingActionButton: use `manageFloatingActionButtonBehavior`
 
