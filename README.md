@@ -81,6 +81,12 @@ bottomNavigation.setInactiveColor(Color.parseColor("#747474"));
 // Force to tint the drawable (useful for font with icon for example)
 bottomNavigation.setForceTint(true);
 
+// Display color under navigation bar (API 21+)
+// Don't forget these lines in your style-v21
+// <item name="android:windowTranslucentNavigation">true</item>
+// <item name="android:fitsSystemWindows">true</item>
+bottomNavigation.setTranslucentNavigationEnabled(true);
+
 // Manage titles
 bottomNavigation.setTitleState(AHBottomNavigation.TitleState.SHOW_WHEN_ACTIVE);
 bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
