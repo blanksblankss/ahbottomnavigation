@@ -13,7 +13,7 @@ ext {
     siteUrl = 'https://github.com/aurelhubert/ahbottomnavigation'
     gitUrl = 'https://github.com/aurelhubert/ahbottomnavigation.git'
 
-    libraryVersion = '1.5.1'
+    libraryVersion = '2.0.0'
 
     developerId = 'aurelhubert'
     developerName = 'Aurelien Hubert'
