@@ -78,6 +78,7 @@ public class DemoActivity extends AppCompatActivity {
 		}
 
 		bottomNavigation.manageFloatingActionButtonBehavior(floatingActionButton);
+		bottomNavigation.setTranslucentNavigationEnabled(true);
 
 		bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
 			@Override
@@ -202,7 +203,6 @@ public class DemoActivity extends AppCompatActivity {
 				Snackbar.make(bottomNavigation, "Snackbar with bottom navigation",
 						Snackbar.LENGTH_SHORT).show();
 
-				handler.postDelayed(this, 5000);
 			}
 		}, 3000);
 
