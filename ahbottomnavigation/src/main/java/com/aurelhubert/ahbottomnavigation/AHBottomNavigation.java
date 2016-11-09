@@ -1151,7 +1151,7 @@ public class AHBottomNavigation extends FrameLayout {
 		}
 
 		if (titleState != TitleState.ALWAYS_HIDE &&
-				(items.size() == MIN_ITEMS || titleState == TitleState.SHOW_WHEN_ACTIVE)) {
+				(items.size() == MIN_ITEMS || titleState == TitleState.ALWAYS_SHOW)) {
 			updateItems(position, useCallback);
 		} else {
 			updateSmallItems(position, useCallback);
