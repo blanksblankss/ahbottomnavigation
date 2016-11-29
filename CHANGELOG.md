@@ -1,6 +1,10 @@
 ## Changelog
 
-### Newest version: 2.0.1
+### Newest version: 2.0.2
+
+* Fix a bug when titles are always shown 
+
+### 2.0.1
 
 * Fix a crash with `setCurrentItem(int position, boolean useCallback)`
 
