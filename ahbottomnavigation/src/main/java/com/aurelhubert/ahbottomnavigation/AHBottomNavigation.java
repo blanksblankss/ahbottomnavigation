@@ -743,12 +743,8 @@ public class AHBottomNavigation extends FrameLayout {
 					AHHelper.updateTopMargin(icon, inactiveMargin, activeMarginTop);
 					AHHelper.updateLeftMargin(notification, notificationInactiveMarginLeft, notificationActiveMarginLeft);
 					AHHelper.updateTopMargin(notification, notificationInactiveMarginTop, notificationActiveMarginTop);
-				}
-
-				AHHelper.updateTextColor(title, itemInactiveColor, itemActiveColor);
-				AHHelper.updateAlpha(title, 0, 1);
-
-				if (titleState != TitleState.ALWAYS_HIDE) {
+					AHHelper.updateTextColor(title, itemInactiveColor, itemActiveColor);
+					AHHelper.updateAlpha(title, 0, 1);
 					AHHelper.updateWidth(container, notSelectedItemWidth, selectedItemWidth);
 				}
 
@@ -814,12 +810,8 @@ public class AHBottomNavigation extends FrameLayout {
 					AHHelper.updateTopMargin(icon, activeMarginTop, inactiveMargin);
 					AHHelper.updateLeftMargin(notification, notificationActiveMarginLeft, notificationInactiveMarginLeft);
 					AHHelper.updateTopMargin(notification, notificationActiveMarginTop, notificationInactiveMarginTop);
-				}
-
-				AHHelper.updateTextColor(title, itemActiveColor, itemInactiveColor);
-				AHHelper.updateAlpha(title, 1, 0);
-
-				if (titleState != TitleState.ALWAYS_HIDE) {
+					AHHelper.updateTextColor(title, itemActiveColor, itemInactiveColor);
+					AHHelper.updateAlpha(title, 1, 0);
 					AHHelper.updateWidth(container, selectedItemWidth, notSelectedItemWidth);
 				}
 
