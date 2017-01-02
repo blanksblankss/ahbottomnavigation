@@ -1,6 +1,10 @@
 ## Changelog
 
-### Newest version: 2.0.2
+### Newest version: 2.0.3
+
+* Added method `getViewAtPosition(int position)`
+
+### 2.0.2
 
 * Fix a bug when titles are always shown 
 
