@@ -78,6 +78,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private ArrayList<AHBottomNavigationItem> items = new ArrayList<>();
 	private ArrayList<View> views = new ArrayList<>();
 	private AHBottomNavigationBehavior<AHBottomNavigation> bottomNavigationBehavior;
+	private LinearLayout linearLayoutContainer;
 	private View backgroundColorView;
 	private Animator circleRevealAnim;
 	private boolean colored = false;
@@ -242,18 +243,18 @@ public class AHBottomNavigation extends FrameLayout {
 			bottomNavigationHeight = layoutHeight;
 		}
 
-		LinearLayout linearLayout = new LinearLayout(context);
-		linearLayout.setOrientation(LinearLayout.HORIZONTAL);
-		linearLayout.setGravity(Gravity.CENTER);
+		linearLayoutContainer = new LinearLayout(context);
+		linearLayoutContainer.setOrientation(LinearLayout.HORIZONTAL);
+		linearLayoutContainer.setGravity(Gravity.CENTER);
 
 		LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, layoutHeight);
-		addView(linearLayout, layoutParams);
+		addView(linearLayoutContainer, layoutParams);
 
 		if (titleState != TitleState.ALWAYS_HIDE &&
 				(items.size() == MIN_ITEMS || titleState == TitleState.ALWAYS_SHOW)) {
-			createClassicItems(linearLayout);
+			createClassicItems(linearLayoutContainer);
 		} else {
-			createSmallItems(linearLayout);
+			createSmallItems(linearLayoutContainer);
 		}
 
 		// Force a request layout after all the items have been created
@@ -1489,6 +1490,19 @@ public class AHBottomNavigation extends FrameLayout {
 	 */
 	public boolean isHidden() {
 		return isHidden;
+	}
+
+	/**
+	 * Get the view at the given position
+	 * @param position int
+	 * @return The view at the position, or null
+	 */
+	public View getViewAtPosition(int position) {
+		if (linearLayoutContainer != null && position >= 0
+				&& position < linearLayoutContainer.getChildCount()) {
+			return linearLayoutContainer.getChildAt(position);
+		}
+		return null;
 	}
 
 	////////////////
