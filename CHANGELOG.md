@@ -1,6 +1,10 @@
 ## Changelog
 
-### Newest version: 2.0.3
+### Newest version: 2.0.4
+
+* Fixed the icon alpha update for API >= 25
+
+### 2.0.3
 
 * Added method `getViewAtPosition(int position)`
 
