@@ -92,6 +92,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private boolean behaviorTranslationEnabled = true;
 	private boolean needHideBottomNavigation = false;
 	private boolean hideBottomNavigationWithAnimation = false;
+	private boolean soundEffectsEnabled = true;
 
 	// Variables (Styles)
 	private Typeface titleTypeface;
@@ -133,6 +134,12 @@ public class AHBottomNavigation extends FrameLayout {
 	public AHBottomNavigation(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		init(context, attrs);
+	}
+
+	@Override
+	public void setSoundEffectsEnabled(final boolean soundEffectsEnabled) {
+		super.setSoundEffectsEnabled(soundEffectsEnabled);
+		this.soundEffectsEnabled = soundEffectsEnabled;
 	}
 
 	@Override
@@ -437,6 +444,7 @@ public class AHBottomNavigation extends FrameLayout {
 					updateItems(itemIndex, true);
 				}
 			});
+			view.setSoundEffectsEnabled(this.soundEffectsEnabled);
 
 			LayoutParams params = new LayoutParams((int) itemWidth, (int) height);
 			linearLayout.addView(view, params);
@@ -554,6 +562,7 @@ public class AHBottomNavigation extends FrameLayout {
 					updateSmallItems(itemIndex, true);
 				}
 			});
+			view.setSoundEffectsEnabled(this.soundEffectsEnabled);
 
 			int width = i == currentItem ? (int) selectedItemWidth :
 					(int) itemWidth;
