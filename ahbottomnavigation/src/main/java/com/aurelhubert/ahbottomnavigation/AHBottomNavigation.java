@@ -444,7 +444,7 @@ public class AHBottomNavigation extends FrameLayout {
 					updateItems(itemIndex, true);
 				}
 			});
-			view.setSoundEffectsEnabled(this.soundEffectsEnabled);
+			view.setSoundEffectsEnabled(soundEffectsEnabled);
 
 			LayoutParams params = new LayoutParams((int) itemWidth, (int) height);
 			linearLayout.addView(view, params);
@@ -562,7 +562,7 @@ public class AHBottomNavigation extends FrameLayout {
 					updateSmallItems(itemIndex, true);
 				}
 			});
-			view.setSoundEffectsEnabled(this.soundEffectsEnabled);
+			view.setSoundEffectsEnabled(soundEffectsEnabled);
 
 			int width = i == currentItem ? (int) selectedItemWidth :
 					(int) itemWidth;
