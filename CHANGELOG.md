@@ -1,6 +1,12 @@
 ## Changelog
 
-### Newest version: 2.0.4
+### Newest version: 2.0.5
+
+* Add `setTitleTextSizeInSp(float activeSize, float inactiveSize)`
+* Update selected item background for API >= 21
+* Allow for the disabling of sound effects
+
+### 2.0.4
 
 * Fixed the icon alpha update for API >= 25
 
