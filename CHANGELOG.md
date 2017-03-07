@@ -1,6 +1,12 @@
 ## Changelog
 
-### Newest version: 2.0.5
+### Newest version: 2.0.6
+
+* Fix selected item background for API >= 21
+* Fix `isHidden()` method
+* Update design support library version
+
+### 2.0.5
 
 * Add `setTitleTextSizeInSp(float activeSize, float inactiveSize)`
 * Update selected item background for API >= 21
