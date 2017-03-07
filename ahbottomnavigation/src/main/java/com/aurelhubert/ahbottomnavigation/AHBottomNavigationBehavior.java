@@ -304,5 +304,12 @@ public class AHBottomNavigationBehavior<V extends View> extends VerticalScrollin
 			}
 		}
 	}
-
+	
+	/**
+	 * Is hidden
+	 * @return
+	 */
+	public boolean isHidden() {
+		return hidden;
+	}
 }
