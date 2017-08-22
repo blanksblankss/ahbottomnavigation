@@ -53,7 +53,13 @@ public class DemoActivity extends AppCompatActivity {
 		super.onDestroy();
 		handler.removeCallbacksAndMessages(null);
 	}
-
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		bottomNavigation.setCurrentItem(1, true);
+	}
+	
 	/**
 	 * Init UI
 	 */
@@ -104,6 +110,11 @@ public class DemoActivity extends AppCompatActivity {
 				}
 
 				viewPager.setCurrentItem(position, false);
+				
+				if (currentFragment == null) {
+					return true;
+				}
+				
 				currentFragment = adapter.getCurrentFragment();
 				currentFragment.willBeDisplayed();
 
@@ -181,7 +192,7 @@ public class DemoActivity extends AppCompatActivity {
 				return true;
 			}
 		});
-
+		
 		/*
 		bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNavigationPositionListener() {
 			@Override public void onPositionChange(int y) {
@@ -211,7 +222,7 @@ public class DemoActivity extends AppCompatActivity {
 
 			}
 		}, 3000);
-
+		
 		//bottomNavigation.setDefaultBackgroundResource(R.drawable.bottom_navigation_background);
 	}
 
