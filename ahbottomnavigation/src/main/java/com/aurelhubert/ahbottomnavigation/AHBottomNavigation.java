@@ -1512,7 +1512,10 @@ public class AHBottomNavigation extends FrameLayout {
 	 * Return if the Bottom Navigation is hidden or not
 	 */
 	public boolean isHidden() {
-		return bottomNavigationBehavior.isHidden();
+		if (bottomNavigationBehavior != null) {
+			return bottomNavigationBehavior.isHidden();
+		}
+		return false;
 	}
 
 	/**
