@@ -54,12 +54,6 @@ public class DemoActivity extends AppCompatActivity {
 		handler.removeCallbacksAndMessages(null);
 	}
 	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		bottomNavigation.setCurrentItem(1, true);
-	}
-	
 	/**
 	 * Init UI
 	 */
