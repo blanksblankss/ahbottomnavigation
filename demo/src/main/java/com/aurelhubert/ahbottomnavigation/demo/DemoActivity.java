@@ -3,6 +3,7 @@ package com.aurelhubert.ahbottomnavigation.demo;
 import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.animation.LinearOutSlowInInterpolator;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.view.View;
 import android.view.animation.OvershootInterpolator;
 
@@ -56,7 +58,11 @@ public class DemoActivity extends AppCompatActivity {
 	 * Init UI
 	 */
 	private void initUI() {
-
+		
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+			AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+		}
+		
 		bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
 		viewPager = (AHBottomNavigationViewPager) findViewById(R.id.view_pager);
 		floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_action_button);
