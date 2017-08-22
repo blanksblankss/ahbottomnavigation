@@ -116,6 +116,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private Typeface notificationTypeface;
 	private int notificationActiveMarginLeft, notificationInactiveMarginLeft;
 	private int notificationActiveMarginTop, notificationInactiveMarginTop;
+	private long notificationAnimationDuration;
 
 	/**
 	 * Constructors
@@ -218,6 +219,7 @@ public class AHBottomNavigation extends FrameLayout {
 		notificationInactiveMarginLeft = (int) resources.getDimension(R.dimen.bottom_navigation_notification_margin_left);
 		notificationActiveMarginTop = (int) resources.getDimension(R.dimen.bottom_navigation_notification_margin_top_active);
 		notificationInactiveMarginTop = (int) resources.getDimension(R.dimen.bottom_navigation_notification_margin_top);
+		notificationAnimationDuration = 150;
 
 		ViewCompat.setElevation(this, resources.getDimension(R.dimen.bottom_navigation_elevation));
 		setClipToPadding(false);
@@ -898,7 +900,7 @@ public class AHBottomNavigation extends FrameLayout {
 							.scaleY(0)
 							.alpha(0)
 							.setInterpolator(new AccelerateInterpolator())
-							.setDuration(150)
+							.setDuration(notificationAnimationDuration)
 							.start();
 				}
 			} else if (!notificationItem.isEmpty()) {
@@ -911,7 +913,7 @@ public class AHBottomNavigation extends FrameLayout {
 							.scaleY(1)
 							.alpha(1)
 							.setInterpolator(new OvershootInterpolator())
-							.setDuration(150)
+							.setDuration(notificationAnimationDuration)
 							.start();
 				}
 			}
@@ -1464,6 +1466,11 @@ public class AHBottomNavigation extends FrameLayout {
 	 */
 	public void setNotificationTypeface(Typeface typeface) {
 		this.notificationTypeface = typeface;
+		updateNotifications(true, UPDATE_ALL_NOTIFICATIONS);
+	}
+
+	public void setNotificationAnimationDuration(long notificationAnimationDuration){
+		this.notificationAnimationDuration = notificationAnimationDuration;
 		updateNotifications(true, UPDATE_ALL_NOTIFICATIONS);
 	}
 
