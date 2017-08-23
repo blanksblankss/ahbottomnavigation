@@ -192,20 +192,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private void init(Context context, AttributeSet attrs) {
 		this.context = context;
 		resources = this.context.getResources();
-
-		if (attrs != null) {
-			TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AHBottomNavigationBehavior_Params, 0, 0);
-			try {
-				selectedBackgroundVisible = ta.getBoolean(R.styleable.AHBottomNavigationBehavior_Params_selectedBackgroundVisible, false);
-				translucentNavigationEnabled = ta.getBoolean(R.styleable.AHBottomNavigationBehavior_Params_translucentNavigationEnabled, false);
-			} finally {
-				ta.recycle();
-			}
-		}
-
-		notificationTextColor = ContextCompat.getColor(context, android.R.color.white);
-		bottomNavigationHeight = (int) resources.getDimension(R.dimen.bottom_navigation_height);
-
+		
 		// Item colors
 		titleColorActive = ContextCompat.getColor(context, R.color.colorBottomNavigationAccent);
 		titleColorInactive = ContextCompat.getColor(context, R.color.colorBottomNavigationInactive);
@@ -214,7 +201,35 @@ public class AHBottomNavigation extends FrameLayout {
 		// Colors for colored bottom navigation
 		coloredTitleColorActive = ContextCompat.getColor(context, R.color.colorBottomNavigationActiveColored);
 		coloredTitleColorInactive = ContextCompat.getColor(context, R.color.colorBottomNavigationInactiveColored);
+		
+		if (attrs != null) {
+			TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.AHBottomNavigationBehavior_Params, 0, 0);
+			try {
+				selectedBackgroundVisible = ta.getBoolean(R.styleable.AHBottomNavigationBehavior_Params_selectedBackgroundVisible, false);
+				translucentNavigationEnabled = ta.getBoolean(R.styleable.AHBottomNavigationBehavior_Params_translucentNavigationEnabled, false);
+				
+				titleColorActive = ta.getColor(R.styleable.AHBottomNavigationBehavior_Params_accentColor,
+						ContextCompat.getColor(context, R.color.colorBottomNavigationAccent));
+				titleColorInactive = ta.getColor(R.styleable.AHBottomNavigationBehavior_Params_inactiveColor,
+						ContextCompat.getColor(context, R.color.colorBottomNavigationInactive));
+				itemDisableColor = ta.getColor(R.styleable.AHBottomNavigationBehavior_Params_disableColor,
+						ContextCompat.getColor(context, R.color.colorBottomNavigationDisable));
+				
+				coloredTitleColorActive = ta.getColor(R.styleable.AHBottomNavigationBehavior_Params_coloredActive,
+						ContextCompat.getColor(context, R.color.colorBottomNavigationActiveColored));
+				coloredTitleColorInactive = ta.getColor(R.styleable.AHBottomNavigationBehavior_Params_coloredInactive,
+						ContextCompat.getColor(context, R.color.colorBottomNavigationInactiveColored));
+				
+				colored = ta.getBoolean(R.styleable.AHBottomNavigationBehavior_Params_colored, false);
+				
+			} finally {
+				ta.recycle();
+			}
+		}
 
+		notificationTextColor = ContextCompat.getColor(context, android.R.color.white);
+		bottomNavigationHeight = (int) resources.getDimension(R.dimen.bottom_navigation_height);
+		
 		itemActiveColor = titleColorActive;
 		itemInactiveColor = titleColorInactive;
 
