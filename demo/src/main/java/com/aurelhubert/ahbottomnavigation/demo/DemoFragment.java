@@ -68,7 +68,7 @@ public class DemoFragment extends Fragment {
 		final SwitchCompat switchFiveItems = (SwitchCompat) view.findViewById(R.id.fragment_demo_switch_five_items);
 		final SwitchCompat showHideBottomNavigation = (SwitchCompat) view.findViewById(R.id.fragment_demo_show_hide);
 		final SwitchCompat showSelectedBackground = (SwitchCompat) view.findViewById(R.id.fragment_demo_selected_background);
-        final Spinner spinnerTitleState = (Spinner) view.findViewById(R.id.fragment_demo_title_state);
+		final Spinner spinnerTitleState = (Spinner) view.findViewById(R.id.fragment_demo_title_state);
 		final SwitchCompat switchTranslucentNavigation = (SwitchCompat) view.findViewById(R.id.fragment_demo_translucent_navigation);
 
 		switchColored.setChecked(demoActivity.isBottomNavigationColored());
@@ -114,25 +114,25 @@ public class DemoFragment extends Fragment {
 				demoActivity.updateSelectedBackgroundVisibility(isChecked);
 			}
 		});
-        final List<String> titleStates = new ArrayList<>();
-        for (AHBottomNavigation.TitleState titleState : AHBottomNavigation.TitleState.values()) {
-            titleStates.add(titleState.toString());
-        }
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, titleStates);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerTitleState.setAdapter(spinnerAdapter);
-        spinnerTitleState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                AHBottomNavigation.TitleState titleState = AHBottomNavigation.TitleState.valueOf(titleStates.get(position));
-                ((DemoActivity) getActivity()).setTitleState(titleState);
-            }
+		final List<String> titleStates = new ArrayList<>();
+		for (AHBottomNavigation.TitleState titleState : AHBottomNavigation.TitleState.values()) {
+			titleStates.add(titleState.toString());
+		}
+		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, titleStates);
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinnerTitleState.setAdapter(spinnerAdapter);
+		spinnerTitleState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				AHBottomNavigation.TitleState titleState = AHBottomNavigation.TitleState.valueOf(titleStates.get(position));
+				demoActivity.setTitleState(titleState);
+			}
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // do nothing
-            }
-        });
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+				// do nothing
+			}
+		});
 	}
 
 	/**
