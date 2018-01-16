@@ -1,6 +1,61 @@
 ## Changelog
 
-### Newest version: 1.4.0
+### Newest version: 2.1.0
+
+* Update libraries versions
+* Add enable/disable tab state (with custom color)
+* Add new xml attributes (`colored`, `accentColor`, `inactiveColor`, `disableColor`, `coloredActive`, `coloredInactive`)
+* Add param `notificationAnimationDuration`
+* Update getDrawable method with `AppCompatResources.getDrawable(context, drawableRes);`
+If you use drawable selector and target API < 21, don't forget to add this:
+`AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); `
+
+### 2.0.6
+
+* Fix selected item background for API >= 21
+* Fix `isHidden()` method
+* Update design support library version
+
+### 2.0.5
+
+* Add `setTitleTextSizeInSp(float activeSize, float inactiveSize)`
+* Update selected item background for API >= 21
+* Allow for the disabling of sound effects
+
+### 2.0.4
+
+* Fixed the icon alpha update for API >= 25
+
+### 2.0.3
+
+* Added method `getViewAtPosition(int position)`
+
+### 2.0.2
+
+* Fix a bug when titles are always shown 
+
+### 2.0.1
+
+* Fix a crash with `setCurrentItem(int position, boolean useCallback)`
+
+### 2.0.0
+
+* **BREAKING!** 3 states for titles: `SHOW_WHEN_ACTIVE`, `ALWAYS_SHOW` & `ALWAYS_HIDE` (PR #140)
+* Color under the navigation bar (PR #166)
+* Fix CoordinatorLayout with FloatingActionButton: use `manageFloatingActionButtonBehavior`
+
+### 1.5.1
+
+* Fixed ripple effect bug (API 21+)
+
+### 1.5.0
+
+* Added AHNotification class to manage easily the style of each notification (PR #156) (**old method still works**)
+* Added `setForceTitlesHide(boolean forceTitlesHide)` to force the titles to be hidden (when 3 or less items are displayed)
+* Updated `buildToolsVersion` to version `24.0.2`
+* Updated `'com.android.support:design:24.2.1'`
+
+### 1.4.0
 
 * Added `isHidden()` method.
 * Added `setDefaultBackgroundResource(@DrawableRes int defaultBackgroundResource)`

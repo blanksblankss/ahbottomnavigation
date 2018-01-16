@@ -181,6 +181,7 @@ public class AHHelper {
 			public void onAnimationUpdate(ValueAnimator animator) {
 				imageView.setImageDrawable(AHHelper.getTintDrawable(drawable,
 						(Integer) animator.getAnimatedValue(), forceTint));
+				imageView.requestLayout();
 			}
 		});
 		colorAnimation.start();
