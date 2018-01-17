@@ -63,9 +63,9 @@ public class DemoActivity extends AppCompatActivity {
 			AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 		}
 		
-		bottomNavigation = (AHBottomNavigation) findViewById(R.id.bottom_navigation);
-		viewPager = (AHBottomNavigationViewPager) findViewById(R.id.view_pager);
-		floatingActionButton = (FloatingActionButton) findViewById(R.id.floating_action_button);
+		bottomNavigation = findViewById(R.id.bottom_navigation);
+		viewPager = findViewById(R.id.view_pager);
+		floatingActionButton = findViewById(R.id.floating_action_button);
 
 		if (useMenuResource) {
 			tabColors = getApplicationContext().getResources().getIntArray(R.array.tab_colors);
@@ -287,11 +287,10 @@ public class DemoActivity extends AppCompatActivity {
 	}
 
 	/**
-	 * Show or hide selected item background
+	 * Set title state for bottomNavigation
 	 */
-	public void setForceTitleHide(boolean forceTitleHide) {
-		AHBottomNavigation.TitleState state = forceTitleHide ? AHBottomNavigation.TitleState.ALWAYS_HIDE : AHBottomNavigation.TitleState.ALWAYS_SHOW;
-		bottomNavigation.setTitleState(state);
+	public void setTitleState(AHBottomNavigation.TitleState titleState) {
+		bottomNavigation.setTitleState(titleState);
 	}
 
 	/**

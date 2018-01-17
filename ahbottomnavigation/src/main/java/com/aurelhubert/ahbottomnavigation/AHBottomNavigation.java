@@ -58,6 +58,7 @@ public class AHBottomNavigation extends FrameLayout {
 	// Title state
 	public enum TitleState {
 		SHOW_WHEN_ACTIVE,
+		SHOW_WHEN_ACTIVE_FORCE,
 		ALWAYS_SHOW,
 		ALWAYS_HIDE
 	}
@@ -278,6 +279,7 @@ public class AHBottomNavigation extends FrameLayout {
 		addView(linearLayoutContainer, layoutParams);
 
 		if (titleState != TitleState.ALWAYS_HIDE &&
+				titleState != TitleState.SHOW_WHEN_ACTIVE_FORCE &&
 				(items.size() == MIN_ITEMS || titleState == TitleState.ALWAYS_SHOW)) {
 			createClassicItems(linearLayoutContainer);
 		} else {
