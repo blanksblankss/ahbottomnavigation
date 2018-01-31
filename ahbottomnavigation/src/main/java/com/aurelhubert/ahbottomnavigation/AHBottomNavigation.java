@@ -496,7 +496,7 @@ public class AHBottomNavigation extends FrameLayout {
 		float minWidth = resources.getDimension(R.dimen.bottom_navigation_small_inactive_min_width);
 		float maxWidth = resources.getDimension(R.dimen.bottom_navigation_small_inactive_max_width);
 
-		int layoutWidth = getWidth();
+		int layoutWidth = getWidth() - getPaddingLeft() - getPaddingRight();
 		if (layoutWidth == 0 || items.size() == 0) {
 			return;
 		}
