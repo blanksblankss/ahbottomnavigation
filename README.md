@@ -28,7 +28,7 @@ If you use drawable selector and target API < 21, don't forget to add this:
 ### Gradle
 ```groovy
 dependencies {
-    compile 'com.aurelhubert:ahbottomnavigation:2.1.0'
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
 }
 ```
 ### XML
