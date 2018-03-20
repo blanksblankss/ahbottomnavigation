@@ -278,9 +278,7 @@ public class AHBottomNavigation extends FrameLayout {
 		LayoutParams layoutParams = new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, layoutHeight);
 		addView(linearLayoutContainer, layoutParams);
 
-		if (titleState != TitleState.ALWAYS_HIDE &&
-				titleState != TitleState.SHOW_WHEN_ACTIVE_FORCE &&
-				(items.size() == MIN_ITEMS || titleState == TitleState.ALWAYS_SHOW)) {
+		if (isClassic()) {
 			createClassicItems(linearLayoutContainer);
 		} else {
 			createSmallItems(linearLayoutContainer);
@@ -351,7 +349,9 @@ public class AHBottomNavigation extends FrameLayout {
      * @return true if classic (icon + title)
      */
     private boolean isClassic() {
-        return titleState == TitleState.ALWAYS_SHOW || items.size() <= MIN_ITEMS && titleState != TitleState.ALWAYS_SHOW;
+        return titleState != TitleState.ALWAYS_HIDE &&
+				titleState != TitleState.SHOW_WHEN_ACTIVE_FORCE &&
+				(items.size() == MIN_ITEMS || titleState == TitleState.ALWAYS_SHOW)
     }
 
 	/**
