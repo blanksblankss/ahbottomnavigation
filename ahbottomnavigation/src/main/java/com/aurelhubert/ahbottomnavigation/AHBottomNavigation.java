@@ -993,6 +993,17 @@ public class AHBottomNavigation extends FrameLayout {
 	////////////
 	// PUBLIC //
 	////////////
+	
+	/**
+	 * Add an item at the given index
+	 */
+	public void addItemAtIndex(int index, AHBottomNavigationItem item) {
+		if (this.items.size() > MAX_ITEMS) {
+			Log.w(TAG, "The items list should not have more than 5 items");
+		}
+		this.items.add(index, item);
+		createItems();
+	}
 
 	/**
 	 * Add an item
