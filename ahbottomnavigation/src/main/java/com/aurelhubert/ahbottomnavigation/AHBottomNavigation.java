@@ -898,7 +898,7 @@ public class AHBottomNavigation extends FrameLayout {
 			final int currentTextColor = AHNotificationHelper.getTextColor(notificationItem, notificationTextColor);
 			final int currentBackgroundColor = AHNotificationHelper.getBackgroundColor(notificationItem, notificationBackgroundColor);
 
-			TextView notification = (TextView) views.get(i).findViewById(R.id.bottom_navigation_notification);
+			final TextView notification = (TextView) views.get(i).findViewById(R.id.bottom_navigation_notification);
 
 			String currentValue = notification.getText().toString();
 			boolean animate = !currentValue.equals(String.valueOf(notificationItem.getText()));
@@ -932,7 +932,6 @@ public class AHBottomNavigation extends FrameLayout {
 			}
 
 			if (notificationItem.isEmpty() && notification.getText().length() > 0) {
-				notification.setText("");
 				if (animate) {
 					notification.animate()
 							.scaleX(0)
@@ -940,6 +939,24 @@ public class AHBottomNavigation extends FrameLayout {
 							.alpha(0)
 							.setInterpolator(new AccelerateInterpolator())
 							.setDuration(notificationAnimationDuration)
+							.setListener(new Animator.AnimatorListener() {
+								@Override
+								public void onAnimationStart(Animator animation) {
+								}
+
+								@Override
+								public void onAnimationEnd(Animator animation) {
+									notification.setText("");
+								}
+
+								@Override
+								public void onAnimationCancel(Animator animation) {
+								}
+
+								@Override
+								public void onAnimationRepeat(Animator animation) {
+								}
+							})
 							.start();
 				}
 			} else if (!notificationItem.isEmpty()) {
