@@ -351,7 +351,7 @@ public class AHBottomNavigation extends FrameLayout {
     private boolean isClassic() {
         return titleState != TitleState.ALWAYS_HIDE &&
 				titleState != TitleState.SHOW_WHEN_ACTIVE_FORCE &&
-				(items.size() == MIN_ITEMS || titleState == TitleState.ALWAYS_SHOW)
+				(items.size() == MIN_ITEMS || titleState == TitleState.ALWAYS_SHOW);
     }
 
 	/**
