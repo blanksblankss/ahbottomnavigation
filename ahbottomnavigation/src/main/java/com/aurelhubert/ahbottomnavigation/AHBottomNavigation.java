@@ -109,7 +109,7 @@ public class AHBottomNavigation extends FrameLayout {
 	private float titleActiveTextSize, titleInactiveTextSize;
 	private int bottomNavigationHeight, navigationBarHeight = 0;
 	private float selectedItemWidth, notSelectedItemWidth;
-	private boolean forceTint = false;
+	private boolean forceTint = true;
 	private TitleState titleState = TitleState.SHOW_WHEN_ACTIVE;
 
 	// Notifications
@@ -372,7 +372,7 @@ public class AHBottomNavigation extends FrameLayout {
 			maxWidth = resources.getDimension(R.dimen.bottom_navigation_small_inactive_max_width);
 		}
 
-		int layoutWidth = getWidth();
+		int layoutWidth = getWidth() - getPaddingLeft() - getPaddingRight();
 		if (layoutWidth == 0 || items.size() == 0) {
 			return;
 		}
@@ -958,6 +958,7 @@ public class AHBottomNavigation extends FrameLayout {
 							.alpha(0)
 							.setInterpolator(new AccelerateInterpolator())
 							.setDuration(notificationAnimationDuration)
+							.setDuration(3000)
 							.setListener(new Animator.AnimatorListener() {
 								@Override
 								public void onAnimationStart(Animator animation) {
@@ -1007,7 +1008,11 @@ public class AHBottomNavigation extends FrameLayout {
 		if (this.items.size() > MAX_ITEMS) {
 			Log.w(TAG, "The items list should not have more than 5 items");
 		}
-		this.items.add(index, item);
+		if (index < items.size()) {
+			this.items.add(index, item);
+		} else {
+			Log.w(TAG, "The index is out of bounds (index: " + index + ", size: " + this.items.size() + ")");
+		}
 		createItems();
 	}
 
