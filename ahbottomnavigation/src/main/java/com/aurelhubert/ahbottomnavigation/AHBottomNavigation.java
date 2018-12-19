@@ -958,7 +958,6 @@ public class AHBottomNavigation extends FrameLayout {
 							.alpha(0)
 							.setInterpolator(new AccelerateInterpolator())
 							.setDuration(notificationAnimationDuration)
-							.setDuration(3000)
 							.setListener(new Animator.AnimatorListener() {
 								@Override
 								public void onAnimationStart(Animator animation) {
