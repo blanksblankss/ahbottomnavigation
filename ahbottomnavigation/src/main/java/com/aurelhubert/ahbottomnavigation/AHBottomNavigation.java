@@ -242,8 +242,7 @@ public class AHBottomNavigation extends FrameLayout {
 		notificationAnimationDuration = 150;
 
 		ViewCompat.setElevation(this, resources.getDimension(R.dimen.bottom_navigation_elevation));
-		setClipToPadding(false);
-
+		
 		ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT, bottomNavigationHeight);
 		setLayoutParams(params);
@@ -262,6 +261,7 @@ public class AHBottomNavigation extends FrameLayout {
 		int layoutHeight = (int) resources.getDimension(R.dimen.bottom_navigation_height);
 
 		removeAllViews();
+
 		views.clear();
 		backgroundColorView = new View(context);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -471,11 +471,14 @@ public class AHBottomNavigation extends FrameLayout {
 				icon.setImageDrawable(iconDrawable);
 				title.setTextColor(current ? itemActiveColor : itemInactiveColor);
 				view.setSoundEffectsEnabled(soundEffectsEnabled);
+				view.setEnabled(true);
 			} else {
 				iconDrawable = forceTint ? AHHelper.getTintDrawable(items.get(i).getDrawable(context),
 						itemDisableColor, forceTint) : items.get(i).getDrawable(context);
 				icon.setImageDrawable(iconDrawable);
 				title.setTextColor(itemDisableColor);
+				view.setClickable(true);
+				view.setEnabled(false);
 			}
 
 			LayoutParams params = new LayoutParams((int) itemWidth, (int) height);
@@ -597,12 +600,15 @@ public class AHBottomNavigation extends FrameLayout {
 					}
 				});
 				view.setSoundEffectsEnabled(soundEffectsEnabled);
+				view.setEnabled(true);
 			} else {
 				iconDrawable = forceTint ? AHHelper.getTintDrawable(items.get(i).getDrawable(context),
 						itemDisableColor, forceTint) : items.get(i).getDrawable(context);
 				icon.setImageDrawable(iconDrawable);
 				title.setTextColor(itemDisableColor);
 				title.setAlpha(0);
+				view.setClickable(true);
+				view.setEnabled(false);
 			}
 			
 			int width = i == currentItem ? (int) selectedItemWidth :
