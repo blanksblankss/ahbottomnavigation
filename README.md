@@ -24,7 +24,7 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ### Gradle
 ```groovy
 dependencies {
-    compile 'com.aurelhubert:ahbottomnavigation:2.3.0'
+    compile 'com.aurelhubert:ahbottomnavigation:2.3.1'
 }
 ```
 ### XML
@@ -36,7 +36,7 @@ dependencies {
 ```
 OR
 ```xml
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -49,7 +49,7 @@ OR
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" />
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 ```
 
 ### Activity/Fragment
