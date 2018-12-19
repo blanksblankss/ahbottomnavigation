@@ -8,15 +8,6 @@ Library to implement the Bottom Navigation component from Material Design guidel
 <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo1.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo2.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo3.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo4.gif" width="208" height="368" />
 
 ## What's new (2.3.1) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
-* **Migrate project to AndroidX**
-* Update libraries versions
-* Incorporate padding into item width calculation
-* Badge removal no longer clears text prior to animation
-* Fix NPE crash when currentItem was switched programmatically with titleState = TitleState.SHOW_WHEN_ACTIVE_FORCE
-* Update isClassic() in AHBottomNavigation
-* Navigation item layouts for >= SDK 21 now use item_background drawable for background.
-* Only change drawable colour if forceTint is true (default value)
-* Add method `addItemAtIndex(int index, AHBottomNavigationItem item)` (with warning when index is out of bounds)
 * Fix animation duration for notification
 
 ## Features

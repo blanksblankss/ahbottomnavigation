@@ -1,6 +1,9 @@
 ## Changelog
 
-### Newest version: 2.3.0
+### Newest version: 2.3.1
+* Fix animation duration for notification
+
+### 2.3.0
 * Migrate project to AndroidX
 * Update libraries versions
 * Incorporate padding into item width calculation
@@ -11,7 +14,7 @@
 * Only change drawable colour if forceTint is true (default value)
 * Add method `addItemAtIndex(int index, AHBottomNavigationItem item)` (with warning when index is out of bounds)
 
-### Newest version: 2.2.0
+### 2.2.0
 * Update libraries versions
 * Add another state for titles: `SHOW_WHEN_ACTIVE_FORCE` (PR #313)
 
