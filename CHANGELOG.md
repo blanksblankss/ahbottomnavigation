@@ -1,5 +1,16 @@
 ## Changelog
 
+### Newest version: 2.3.0
+* Migrate project to AndroidX
+* Update libraries versions
+* Incorporate padding into item width calculation
+* Badge removal no longer clears text prior to animation
+* Fix NPE crash when currentItem was switched programmatically with titleState = TitleState.SHOW_WHEN_ACTIVE_FORCE
+* Update isClassic() in AHBottomNavigation
+* Navigation item layouts for >= SDK 21 now use item_background drawable for background.
+* Only change drawable colour if forceTint is true (default value)
+* Add method `addItemAtIndex(int index, AHBottomNavigationItem item)` (with warning when index is out of bounds)
+
 ### Newest version: 2.2.0
 * Update libraries versions
 * Add another state for titles: `SHOW_WHEN_ACTIVE_FORCE` (PR #313)

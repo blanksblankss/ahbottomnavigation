@@ -5,9 +5,16 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ## Demo
 <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo1.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo2.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo3.gif" width="208" height="368" /> <img src="https://raw.githubusercontent.com/aurelhubert/ahbottomnavigation/master/demo4.gif" width="208" height="368" />
 
-## What's new (2.2.0) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
+## What's new (2.3.0) - [Changelog](https://github.com/aurelhubert/ahbottomnavigation/blob/master/CHANGELOG.md)
+* Migrate project to AndroidX
 * Update libraries versions
-* Add another state for titles: `SHOW_WHEN_ACTIVE_FORCE` (PR #313)
+* Incorporate padding into item width calculation
+* Badge removal no longer clears text prior to animation
+* Fix NPE crash when currentItem was switched programmatically with titleState = TitleState.SHOW_WHEN_ACTIVE_FORCE
+* Update isClassic() in AHBottomNavigation
+* Navigation item layouts for >= SDK 21 now use item_background drawable for background.
+* Only change drawable colour if forceTint is true (default value)
+* Add method `addItemAtIndex(int index, AHBottomNavigationItem item)` (with warning when index is out of bounds)
 
 ## Features
 * Follow the bottom navigation guidelines (https://www.google.com/design/spec/components/bottom-navigation.html)
@@ -23,7 +30,7 @@ Library to implement the Bottom Navigation component from Material Design guidel
 ### Gradle
 ```groovy
 dependencies {
-    compile 'com.aurelhubert:ahbottomnavigation:2.2.0'
+    compile 'com.aurelhubert:ahbottomnavigation:2.3.0'
 }
 ```
 ### XML
