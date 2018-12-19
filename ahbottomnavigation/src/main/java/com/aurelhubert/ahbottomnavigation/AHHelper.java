@@ -8,8 +8,8 @@ import android.content.ContextWrapper;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.v4.graphics.drawable.DrawableCompat;
+import androidx.annotation.ColorInt;
+import androidx.core.graphics.drawable.DrawableCompat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.View;
@@ -35,7 +35,7 @@ public class AHHelper {
 	public static Drawable getTintDrawable(Drawable drawable, @ColorInt int color, boolean forceTint) {
 		if (forceTint) {
 			drawable.clearColorFilter();
-			drawable.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+			drawable.mutate().setColorFilter(color, PorterDuff.Mode.SRC_IN);
 			drawable.invalidateSelf();
 			return drawable;
 		}
@@ -174,17 +174,19 @@ public class AHHelper {
 	public static void updateDrawableColor(final Context context, final Drawable drawable,
 	                                       final ImageView imageView, @ColorInt int fromColor,
 	                                       @ColorInt int toColor, final boolean forceTint) {
-		ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), fromColor, toColor);
-		colorAnimation.setDuration(150);
-		colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-			@Override
-			public void onAnimationUpdate(ValueAnimator animator) {
-				imageView.setImageDrawable(AHHelper.getTintDrawable(drawable,
-						(Integer) animator.getAnimatedValue(), forceTint));
-				imageView.requestLayout();
-			}
-		});
-		colorAnimation.start();
+		if (forceTint) {
+			ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), fromColor, toColor);
+			colorAnimation.setDuration(150);
+			colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+				@Override
+				public void onAnimationUpdate(ValueAnimator animator) {
+					imageView.setImageDrawable(AHHelper.getTintDrawable(drawable,
+							(Integer) animator.getAnimatedValue(), forceTint));
+					imageView.requestLayout();
+				}
+			});
+			colorAnimation.start();
+		}
 	}
 
 	/**
