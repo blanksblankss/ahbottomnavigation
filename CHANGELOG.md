@@ -1,6 +1,9 @@
 ## Changelog
 
-### Newest version: 2.3.1
+### Newest version: 2.3.2
+* Remove notification animation listener to avoid weird behaviors
+
+### 2.3.1
 * Fix animation duration for notification
 
 ### 2.3.0
