@@ -958,24 +958,6 @@ public class AHBottomNavigation extends FrameLayout {
 							.alpha(0)
 							.setInterpolator(new AccelerateInterpolator())
 							.setDuration(notificationAnimationDuration)
-							.setListener(new Animator.AnimatorListener() {
-								@Override
-								public void onAnimationStart(Animator animation) {
-								}
-
-								@Override
-								public void onAnimationEnd(Animator animation) {
-									notification.setText("");
-								}
-
-								@Override
-								public void onAnimationCancel(Animator animation) {
-								}
-
-								@Override
-								public void onAnimationRepeat(Animator animation) {
-								}
-							})
 							.start();
 				}
 			} else if (!notificationItem.isEmpty()) {
