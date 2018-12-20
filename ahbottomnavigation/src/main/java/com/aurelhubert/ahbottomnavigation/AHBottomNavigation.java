@@ -951,6 +951,7 @@ public class AHBottomNavigation extends FrameLayout {
 			}
 
 			if (notificationItem.isEmpty() && notification.getText().length() > 0) {
+				notification.setText(String.valueOf(notificationItem.getText()));
 				if (animate) {
 					notification.animate()
 							.scaleX(0)
