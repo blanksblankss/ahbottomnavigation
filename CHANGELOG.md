@@ -1,6 +1,9 @@
 ## Changelog
 
-### Newest version: 2.3.2
+### Newest version: 2.3.3
+* Re-add old notification animation behavior to avoid a bug (from 2.3.0: Badge removal no longer clears text prior to animation)
+
+### 2.3.2
 * Remove notification animation listener to avoid weird behaviors
 
 ### 2.3.1
